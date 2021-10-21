@@ -7,7 +7,7 @@ using System.Text;
 
 namespace KursSelenium.LokatorySelektoryCSS
 {
-    class CSSnoweAtrybuty
+    class CSSzadanie
     {
         IWebDriver driver;
 
