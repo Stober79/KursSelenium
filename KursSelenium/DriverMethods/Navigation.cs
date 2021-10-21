@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+
+
+namespace KursSelenium.DriverMethods
+{
+    class Navigation
+    {
+       
+            IWebDriver driver;
+
+            [SetUp]
+
+            public void Setup()
+            {
+                driver = new ChromeDriver();
+
+                driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
+                driver.Manage().Timeouts().PageLoad = System.TimeSpan.FromSeconds(10);
+            }
+
+            [Test]
+            public void Test1()
+            {
+                 Uri googleUri = new Uri("https://google.pl");
+                 driver.Navigate().GoToUrl(googleUri);
+                 string expctedUrl = "https://www.google.pl/";
+                 Assert.AreEqual(expctedUrl, driver.Url, "Url do not match");
+            }
+
+            [Test]
+            public void LogIn()
+            {
+                driver.Navigate().GoToUrl("https://onet.pl");
+                driver.Manage().Window.Maximize();
+                string expctedUrl = "https://www.onet.pl/";
+                Assert.AreEqual(expctedUrl, driver.Url, "Url do not match");
+                driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
+                driver.FindElement(By.XPath("//a[@href='http://poczta.onet.pl/']")).Click();
+                driver.FindElement(By.Id("mailFormLogin")).SendKeys("robertsteiman@op.pl");
+                driver.FindElement(By.Id("mailFormPassword")).SendKeys("Jung1979!");
+                driver.FindElement(By.XPath("//input[(@class='loginButton')]")).Click();
+                IWebElement logout =  driver.FindElement(By.XPath("//a[@title='Wyloguj']"));
+                Assert.AreEqual(true, logout.Displayed);
+               
+
+            }
+
+            [Test]
+            public void LogOut()
+            {
+                LogIn();
+                driver.FindElement(By.XPath("//a[@title='Wyloguj']")).Click();
+                string pocztaUrl = "https://www.onet.pl/poczta";
+                var isEqual = driver.Url.StartsWith(pocztaUrl, StringComparison.OrdinalIgnoreCase);
+                Assert.True(isEqual);
+
+            }
+
+            [Test]
+            public void OpenAnotherWindow()
+            {
+                driver.Navigate().GoToUrl("https://onet.pl");
+                driver.Manage().Window.Maximize();
+                driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
+                Actions action = new Actions(driver);
+                IWebElement link = driver.FindElement(By.XPath("//a[@class='WeatherDay_tempValue__aHsz9']"));
+                action.SendKeys(link, Keys.Enter).Perform();
+                string pogodaUrl = "https://pogoda.onet.pl/prognoza-pogody";
+                var isEqual = driver.Url.StartsWith(pogodaUrl, StringComparison.OrdinalIgnoreCase);
+                Assert.True(isEqual);
+
+            }
+
+        [TearDown]
+            public void QuitDriver()
+            {
+                driver.Quit();
+            }
+
+
+        
+    }
+}
