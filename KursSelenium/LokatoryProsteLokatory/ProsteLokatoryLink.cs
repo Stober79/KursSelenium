@@ -23,7 +23,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void LocatingByLink()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/product/fuerteventura-sotavento/");
+            driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
             Button.InfoList(driver).Click();
             Button.AddToCart(driver).Click();
             Button.GoToCart(driver).Click();
@@ -38,7 +38,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void LocatingByLinkLambda()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/product/fuerteventura-sotavento/");
+            driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
             Button.InfoList(driver).Click();
             Button.AddToCart(driver).Click();
             Button.GoToCart(driver).Click();
@@ -50,7 +50,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void IsNotPaymentButttonOnPage()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/koszyk/");//pusty koszyk
+            driver.Navigate().GoToUrl(Url.FakestoreCart());//pusty koszyk
             Button.InfoList(driver).Click();
             Assert.Throws < NoSuchElementException>(()=> Button.GoToPayment(driver), "Go to payment link was not found");//wyrazenie Lambda
 

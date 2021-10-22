@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.Element;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -26,7 +27,7 @@ namespace KursSelenium.Pierwsze_Kroki
         public void SizeTest()
         {
             Size size = driver.Manage().Window.Size;
-            driver.Navigate().GoToUrl("https://onet.pl");
+            driver.Navigate().GoToUrl(Url.Onet());
             Assert.AreEqual(new Size(854, 480), size, "Niepoprawna pozycja.");
         }
 
@@ -34,7 +35,7 @@ namespace KursSelenium.Pierwsze_Kroki
         public void PointTest()
         {
             Point point = driver.Manage().Window.Position;
-            driver.Navigate().GoToUrl("https://onet.pl");
+            driver.Navigate().GoToUrl(Url.Onet());
             Assert.AreEqual(new Point(445, 30), point, "Niepoprawna pozycja.");
         }
 

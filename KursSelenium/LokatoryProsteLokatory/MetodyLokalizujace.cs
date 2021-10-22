@@ -24,7 +24,7 @@ namespace KursSelenium.LokatoryProsteLokatory
 
         public void LocatingElementsTest()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
             Button.InfoList(driver).Click();
             IWebElement search = Field.Search(driver);
             search.SendKeys("el gouna");
@@ -34,7 +34,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void LocatingElementsClassTest()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.Navigate().GoToUrl(Url.FakestoreMainPage()); ;
             Button.InfoList(driver).Click();
             driver.FindElement(By.TagName("header")).FindElement(By.ClassName("search-field"));
             IWebElement search = driver.FindElement(By.ClassName("search-field"));
@@ -46,7 +46,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void LocatingElementsClassTest2()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
             Button.InfoList(driver).Click();
             IWebElement header = driver.FindElement(By.TagName("header"));
             IWebElement search = header.FindElement(By.ClassName("search-field"));
@@ -58,7 +58,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void LocatingElementsNameTest()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
             Button.InfoList(driver).Click();
             IWebElement search = driver.FindElement(By.CssSelector(".search-field"));
             search.SendKeys("el gouna");

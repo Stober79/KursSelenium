@@ -1,4 +1,5 @@
-﻿using KursSelenium.StartSetup;
+﻿using KursSelenium.Element;
+using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -24,8 +25,8 @@ namespace KursSelenium.Pierwsze_Kroki
 
         public void BackNavigationTest()
         {
-            driver.Navigate().GoToUrl("https://pl.wikipedia.org");
-            driver.Navigate().GoToUrl("https://www.nasa.gov");
+            driver.Navigate().GoToUrl(Url.WikipediaPl());
+            driver.Navigate().GoToUrl(Url.Nasa());
             driver.Navigate().Back();
             string wikpediaUrl = "https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna";
             Assert.AreEqual(wikpediaUrl, driver.Url, "Url mismatch");
@@ -35,8 +36,8 @@ namespace KursSelenium.Pierwsze_Kroki
         [Test]
         public void ForwordNavigationTest()
         {
-            driver.Navigate().GoToUrl("https://pl.wikipedia.org");
-            driver.Navigate().GoToUrl("https://www.nasa.gov");
+            driver.Navigate().GoToUrl(Url.WikipediaPl());
+            driver.Navigate().GoToUrl(Url.Nasa());
             driver.Navigate().Back();
             driver.Navigate().Forward();
             string nasaUrl = "https://www.nasa.gov/";

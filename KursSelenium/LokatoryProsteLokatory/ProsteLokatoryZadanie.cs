@@ -23,7 +23,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         [Test]
         public void Test()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/moje-konto/");
+            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
             Button.InfoList(driver).Click();
             IWebElement header = driver.FindElement(By.TagName("h1"));
             IWebElement mojeKonto = driver.FindElement(By.ClassName("entry-title"));

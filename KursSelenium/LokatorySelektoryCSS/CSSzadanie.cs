@@ -23,7 +23,7 @@ namespace KursSelenium.LokatorySelektoryCSS
         [Test]
         public void Test()
         {
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/");
+            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
             Button.InfoList(driver).Click();
             driver.FindElement(By.CssSelector("section.storefront-recent-products a[data-product_id='393']")).Click();
             Button.SeeCart(driver).Click();
