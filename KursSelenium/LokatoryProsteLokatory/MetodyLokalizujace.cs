@@ -11,6 +11,15 @@ namespace KursSelenium.LokatoryProsteLokatory
     {
         IWebDriver driver;
 
+        public static void ClickInfoList(IWebDriver driver)
+        {
+            IWebElement infoList = driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link"));
+            if (infoList.Displayed)
+            {
+                infoList.Click();
+            }
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -25,7 +34,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingElementsTest()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
-            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
+            ClickInfoList(driver);
             IWebElement search = driver.FindElement(By.Id("woocommerce-product-search-field-0"));
             search.SendKeys("el gouna");
             search.Submit();

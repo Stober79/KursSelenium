@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.LokatoryProsteLokatory;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -24,7 +25,7 @@ namespace KursSelenium.LokatorySelektoryCSS
         public void Test()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/");
-            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
+            MetodyLokalizujace.ClickInfoList(driver);
             driver.FindElement(By.CssSelector("section.storefront-recent-products a[data-product_id='393']")).Click();
             driver.FindElement(By.CssSelector("section.storefront-recent-products a[title='Zobacz koszyk']")).Click();
             IWebElement droplist = driver.FindElement(By.CssSelector("ul.site-header-cart span.amount"));
