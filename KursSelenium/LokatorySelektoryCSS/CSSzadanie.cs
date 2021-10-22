@@ -23,7 +23,12 @@ namespace KursSelenium.LokatorySelektoryCSS
         [Test]
         public void Test()
         {
-
+            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
+            driver.FindElement(By.CssSelector("section.storefront-recent-products a[data-product_id='393']")).Click();
+            driver.FindElement(By.CssSelector("section.storefront-recent-products a[title='Zobacz koszyk']")).Click();
+            IWebElement droplist = driver.FindElement(By.CssSelector("ul.site-header-cart span.amount"));
+            Assert.IsTrue(droplist.Displayed);
         }
 
         [TearDown]
