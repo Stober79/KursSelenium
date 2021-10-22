@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.StartSetup;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -16,8 +17,7 @@ namespace KursSelenium.Pierwsze_Kroki
         public void Setup()
         {
             driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
-            driver.Manage().Timeouts().PageLoad = System.TimeSpan.FromSeconds(10);
+            Start.Setup(driver);
         }
 
         [Test]
@@ -25,7 +25,6 @@ namespace KursSelenium.Pierwsze_Kroki
         public void BackNavigationTest()
         {
             driver.Navigate().GoToUrl("https://pl.wikipedia.org");
-            driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.nasa.gov");
             driver.Navigate().Back();
             string wikpediaUrl = "https://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna";
@@ -37,7 +36,6 @@ namespace KursSelenium.Pierwsze_Kroki
         public void ForwordNavigationTest()
         {
             driver.Navigate().GoToUrl("https://pl.wikipedia.org");
-            driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.nasa.gov");
             driver.Navigate().Back();
             driver.Navigate().Forward();

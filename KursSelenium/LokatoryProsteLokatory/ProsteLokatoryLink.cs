@@ -1,4 +1,5 @@
 ﻿using KursSelenium.Element;
+using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -16,9 +17,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void Setup()
         {
             driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
+            Start.Setup(driver);
         }
 
         [Test]

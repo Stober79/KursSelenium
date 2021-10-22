@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.StartSetup;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -16,8 +17,7 @@ namespace KursSelenium.Pierwsze_Kroki
         public void Setup()
         {
             driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
-            driver.Manage().Timeouts().PageLoad = System.TimeSpan.FromSeconds(10);
+            Start.Setup(driver);
         }
 
         [Test]
@@ -25,7 +25,6 @@ namespace KursSelenium.Pierwsze_Kroki
         public void TitleTest()
         {
             driver.Navigate().GoToUrl("https://wikipedia.es/");
-            driver.Manage().Window.Maximize();
             string expectedTitle = "Wikipedia, la enciclopedia libre";
             Assert.AreEqual(expectedTitle, driver.Title, "Page title is not correct.");
         }
@@ -35,7 +34,6 @@ namespace KursSelenium.Pierwsze_Kroki
         public void PageSourceTest()
         {
             driver.Navigate().GoToUrl("https://wikipedia.es/");
-            driver.Manage().Window.Maximize();
             string content = "lang=\"es\"";
             Assert.IsTrue(driver.PageSource.Contains(content),"Page Source does not contain this text");
         }

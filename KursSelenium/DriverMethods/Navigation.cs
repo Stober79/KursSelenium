@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -19,10 +20,8 @@ namespace KursSelenium.DriverMethods
             public void Setup()
             {
                 driver = new ChromeDriver();
-
-                driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
-                driver.Manage().Timeouts().PageLoad = System.TimeSpan.FromSeconds(10);
-            }
+                Start.Setup(driver);
+        }
 
             [Test]
             public void Test1()
@@ -37,7 +36,6 @@ namespace KursSelenium.DriverMethods
             public void LogIn()
             {
                 driver.Navigate().GoToUrl("https://onet.pl");
-                driver.Manage().Window.Maximize();
                 string expctedUrl = "https://www.onet.pl/";
                 Assert.AreEqual(expctedUrl, driver.Url, "Url do not match");
                 driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
@@ -66,7 +64,6 @@ namespace KursSelenium.DriverMethods
             public void OpenAnotherWindow()
             {
                 driver.Navigate().GoToUrl("https://onet.pl");
-                driver.Manage().Window.Maximize();
                 driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
                 Actions action = new Actions(driver);
                 IWebElement link = driver.FindElement(By.XPath("//a[@class='WeatherDay_tempValue__aHsz9']"));

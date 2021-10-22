@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using KursSelenium.Element;
+using KursSelenium.StartSetup;
 
 namespace KursSelenium.LokatoryProsteLokatory
 {
@@ -16,9 +17,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void Setup()
         {
             driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
-            driver.Manage().Window.Maximize();
+            Start.Setup(driver);
         }
 
         [Test]
