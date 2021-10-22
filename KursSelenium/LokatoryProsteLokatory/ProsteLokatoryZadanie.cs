@@ -24,6 +24,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void Test()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/moje-konto/");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
             IWebElement header = driver.FindElement(By.TagName("h1"));
             IWebElement mojeKonto = driver.FindElement(By.ClassName("entry-title"));
             IWebElement eMail = driver.FindElement(By.Id("username"));
