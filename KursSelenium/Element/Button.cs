@@ -36,12 +36,6 @@ namespace KursSelenium.Element
             IWebElement element = driver.FindElement((By.LinkText("Przejdź do płatności"))); 
             return element;
         }
-
-        public static IWebElement Search(IWebDriver driver)
-        {
-            IWebElement element = driver.FindElement(By.CssSelector("header.site-header .search-field"));
-            return element;
-        }
         public static IWebElement LogIn(IWebDriver driver)
         {
             IWebElement element = driver.FindElement(By.CssSelector("button[name='login']"));

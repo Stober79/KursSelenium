@@ -35,6 +35,11 @@ namespace KursSelenium.Element
             IWebElement element = driver.FindElement(By.CssSelector("#coupon_code"));
             return element;
         }
+        public static IWebElement Search(IWebDriver driver)
+        {
+            IWebElement element = driver.FindElement(By.CssSelector("header.site-header .search-field"));
+            return element;
+        }
 
     }
 }

@@ -27,7 +27,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
             Button.InfoList(driver).Click();
-            IWebElement search = Button.Search(driver);
+            IWebElement search = Field.Search(driver);
             search.SendKeys("el gouna");
             search.Submit();
             Assert.AreEqual("Egipt – El Gouna – FakeStore", driver.Title, "Title is not correct");
