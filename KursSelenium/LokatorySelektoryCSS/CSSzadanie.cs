@@ -1,10 +1,10 @@
-﻿using KursSelenium.LokatoryProsteLokatory;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using KursSelenium.Element;
 
 namespace KursSelenium.LokatorySelektoryCSS
 {
@@ -25,9 +25,9 @@ namespace KursSelenium.LokatorySelektoryCSS
         public void Test()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/");
-            MetodyLokalizujace.ClickInfoList(driver);
+            Button.InfoList(driver).Click();
             driver.FindElement(By.CssSelector("section.storefront-recent-products a[data-product_id='393']")).Click();
-            driver.FindElement(By.CssSelector("section.storefront-recent-products a[title='Zobacz koszyk']")).Click();
+            Button.SeeCart(driver).Click();
             IWebElement droplist = driver.FindElement(By.CssSelector("ul.site-header-cart span.amount"));
             Assert.IsTrue(droplist.Displayed);
         }

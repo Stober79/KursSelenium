@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.Element;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -24,10 +25,10 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingByLink()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/product/fuerteventura-sotavento/");
-            MetodyLokalizujace.ClickInfoList(driver);
-            driver.FindElement(By.Name("add-to-cart")).Click();
-            driver.FindElement(By.LinkText("Zobacz koszyk")).Click();
-            IWebElement goToCart = driver.FindElement(By.LinkText("Przejdź do płatności"));
+            Button.InfoList(driver).Click();
+            Button.AddToCart(driver).Click();
+            Button.GoToCart(driver).Click();
+            IWebElement goToCart = Button.GoToPayment(driver);
             TestDelegate findLinkGoToPayment = new TestDelegate(FindLinkGoToPayment);//delegata potrzebuje funkcji
             Assert.IsTrue(goToCart.Displayed, "Element is not displayed");
             Assert.DoesNotThrow(findLinkGoToPayment);//uzywa delegaty
@@ -39,10 +40,10 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingByLinkLambda()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/product/fuerteventura-sotavento/");
-            MetodyLokalizujace.ClickInfoList(driver);
-            driver.FindElement(By.Name("add-to-cart")).Click();
-            driver.FindElement(By.LinkText("Zobacz koszyk")).Click();
-            Assert.DoesNotThrow(()=>driver.FindElement(By.LinkText("Przejdź do płatności")), "Go to Payment not found");//wyrazenie Lambda
+            Button.InfoList(driver).Click();
+            Button.AddToCart(driver).Click();
+            Button.GoToCart(driver).Click();
+            Assert.DoesNotThrow(()=> Element.Button.GoToPayment(driver), "Go to Payment not found");//wyrazenie Lambda
 
 
         }
@@ -51,8 +52,8 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void IsNotPaymentButttonOnPage()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/koszyk/");//pusty koszyk
-            MetodyLokalizujace.ClickInfoList(driver);
-            Assert.Throws < NoSuchElementException>(()=> driver.FindElement(By.LinkText("Przejdź do płatności")), "Go to payment link was not found");//wyrazenie Lambda
+            Button.InfoList(driver).Click();
+            Assert.Throws < NoSuchElementException>(()=> Button.GoToPayment(driver), "Go to payment link was not found");//wyrazenie Lambda
 
 
         }

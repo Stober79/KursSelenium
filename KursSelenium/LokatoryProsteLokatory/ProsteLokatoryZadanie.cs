@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using KursSelenium.Element;
 
 namespace KursSelenium.LokatoryProsteLokatory
 {
@@ -24,7 +25,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void Test()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/moje-konto/");
-            MetodyLokalizujace.ClickInfoList(driver);
+            Button.InfoList(driver).Click();
             IWebElement header = driver.FindElement(By.TagName("h1"));
             IWebElement mojeKonto = driver.FindElement(By.ClassName("entry-title"));
             IWebElement eMail = driver.FindElement(By.Id("username"));
