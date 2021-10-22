@@ -25,6 +25,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingElementsTest()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
             IWebElement search = driver.FindElement(By.Id("woocommerce-product-search-field-0"));
             search.SendKeys("el gouna");
             search.Submit();
@@ -34,6 +35,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingElementsClassTest()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
             driver.FindElement(By.TagName("header")).FindElement(By.ClassName("search-field"));
             IWebElement search = driver.FindElement(By.ClassName("search-field"));
             search.SendKeys("el gouna");
@@ -45,6 +47,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingElementsClassTest2()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
             IWebElement header = driver.FindElement(By.TagName("header"));
             IWebElement search = header.FindElement(By.ClassName("search-field"));
             search.SendKeys("el gouna");
@@ -56,6 +59,7 @@ namespace KursSelenium.LokatoryProsteLokatory
         public void LocatingElementsNameTest()
         {
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl");
+            driver.FindElement(By.CssSelector(".woocommerce-store-notice__dismiss-link")).Click();
             IWebElement header = driver.FindElement(By.TagName("header"));
             IWebElement search = header.FindElement(By.Name("s"));
             search.SendKeys("el gouna");
