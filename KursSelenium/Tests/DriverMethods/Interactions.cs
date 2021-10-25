@@ -44,7 +44,7 @@ namespace KursSelenium.Tests.DriverMethods
             Field.Username(driver).SendKeys("katarzyna.palusik@codeconcept.pl");
             Field.Password(driver).SendKeys("$AdminAdmin123");
             Button.LogIn(driver).Click();
-            String zalogowany = driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p")).Text;
+            String zalogowany = driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p:first-of-type")).Text;
             Assert.IsTrue(zalogowany.Contains("katarzyna.palusik"), "Niepoprawny użytkownik");
 
         }
