@@ -56,6 +56,11 @@ namespace KursSelenium.Element
             IWebElement element = driver.FindElement(By.CssSelector("button[name='apply_coupon']"));
             return element;
         }
+        public static IWebElement UpdataCart(IWebDriver driver)
+        {
+            IWebElement element = driver.FindElement(By.XPath(".//button[@name='update_cart']"));
+            return element;
+        }
 
     }
 }

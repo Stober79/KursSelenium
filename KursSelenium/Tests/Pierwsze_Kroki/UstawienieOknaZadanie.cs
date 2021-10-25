@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace KursSelenium.Pierwsze_Kroki
+namespace KursSelenium.Tests.Pierwsze_Kroki
 {
     class UstawienieOknaZadanie
     {

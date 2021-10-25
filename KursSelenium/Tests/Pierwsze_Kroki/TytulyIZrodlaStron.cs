@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KursSelenium.Pierwsze_Kroki
+namespace KursSelenium.Tests.Pierwsze_Kroki
 {
     class TytulyIZrodlaStron
     {

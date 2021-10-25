@@ -9,7 +9,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 
 
-namespace KursSelenium.DriverMethods
+namespace KursSelenium.Tests.DriverMethods
 {
     class Navigation
     {
@@ -22,7 +22,7 @@ namespace KursSelenium.DriverMethods
             {
                 driver = new ChromeDriver();
                 Start.Setup(driver);
-        }
+            }
 
             [Test]
             public void Test1()

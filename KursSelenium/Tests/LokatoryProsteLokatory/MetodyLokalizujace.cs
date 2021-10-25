@@ -7,7 +7,7 @@ using System.Text;
 using KursSelenium.Element;
 using KursSelenium.StartSetup;
 
-namespace KursSelenium.LokatoryProsteLokatory
+namespace KursSelenium.Tests.LokatoryProsteLokatory
 {
     class MetodyLokalizujace
     {

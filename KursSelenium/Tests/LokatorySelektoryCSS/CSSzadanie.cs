@@ -7,7 +7,7 @@ using System.Text;
 using KursSelenium.Element;
 using KursSelenium.StartSetup;
 
-namespace KursSelenium.LokatorySelektoryCSS
+namespace KursSelenium.Tests.LokatorySelektoryCSS
 {
     class CSSzadanie
     {

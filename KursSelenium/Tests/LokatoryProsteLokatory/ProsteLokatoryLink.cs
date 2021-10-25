@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KursSelenium.LokatoryProsteLokatory
+namespace KursSelenium.Tests.LokatoryProsteLokatory
 {
     class ProsteLokatoryLink
     {
