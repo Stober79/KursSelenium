@@ -95,7 +95,7 @@ namespace KursSelenium.Tests.DriverMethods
         {
             driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
             IWebElement amountOfProduct = driver.FindElement(By.CssSelector("input.qty"));
-            string maxAmount = amountOfProduct.GetProperty("max");
+            string maxAmount = amountOfProduct.GetDomProperty("max");
             Assert.AreEqual("11844", maxAmount, "");
         }
         [TearDown]
