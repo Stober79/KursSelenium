@@ -93,15 +93,11 @@ namespace KursSelenium.WebTerminal
             ShowConfiguration();
             Actions action = new Actions(driver);
             action.MoveByOffset(600, 300).Perform();
-            //WebDriverWait waitForPoint = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
-            //waitForPoint.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("/html/body/div[1]/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[2]/td/div/div/div[3]/svg/g[6]/g[1]/polyline")));
-            //IWebElement point = driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div/div[1]/div[2]/div[3]/table/tbody/tr[2]/td/div/div/div[3]/svg/g[6]/g[1]/polyline"));
             action.ContextClick().Perform();
             driver.FindElement(By.XPath("//a[@id='addFlagMenuItem']")).Click();
             IWebElement chooseFlag = driver.FindElement(By.XPath("//a[@class='chosen-single chosen-default']"));
             IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;
             jse.ExecuteScript("arguments[0].Click()", chooseFlag);
-            //action.SendKeys(Keys.ArrowDown).SendKeys(Keys.Enter);
 
         }
         [TearDown]

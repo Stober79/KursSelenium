@@ -38,7 +38,7 @@ namespace KursSelenium.Tests.DriverMethods
             {
                 driver.Navigate().GoToUrl(Url.Onet());
                 string expctedUrl = "https://www.onet.pl/";
-                Assert.AreEqual(expctedUrl, driver.Url, "Url do not match");
+                Assert.AreEqual(expctedUrl, driver.Url, "Url does not match");
                 driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
                 driver.FindElement(By.XPath("//a[@href='http://poczta.onet.pl/']")).Click();
                 driver.FindElement(By.Id("mailFormLogin")).SendKeys("robertsteiman@op.pl");
@@ -47,7 +47,6 @@ namespace KursSelenium.Tests.DriverMethods
                 IWebElement logout =  driver.FindElement(By.XPath("//a[@title='Wyloguj']"));
                 Assert.AreEqual(true, logout.Displayed);
                
-
             }
 
             [Test]
@@ -58,7 +57,6 @@ namespace KursSelenium.Tests.DriverMethods
                 string pocztaUrl = "https://www.onet.pl/poczta";
                 var isEqual = driver.Url.StartsWith(pocztaUrl, StringComparison.OrdinalIgnoreCase);
                 Assert.True(isEqual);
-
             }
 
             [Test]
@@ -72,7 +70,6 @@ namespace KursSelenium.Tests.DriverMethods
                 string pogodaUrl = "https://pogoda.onet.pl/prognoza-pogody";
                 var isEqual = driver.Url.StartsWith(pogodaUrl, StringComparison.OrdinalIgnoreCase);
                 Assert.True(isEqual);
-
             }
 
         [TearDown]
@@ -80,8 +77,6 @@ namespace KursSelenium.Tests.DriverMethods
             {
                 driver.Quit();
             }
-
-
         
     }
 }

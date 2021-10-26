@@ -12,20 +12,27 @@ namespace KursSelenium.Tests.DriverMethods
     class Interactions
     {
         IWebDriver driver;
-
+        private const string correctEmail = "katarzyna.palusik@codeconcept.pl";
+        private const string incorrectEmail = "katarzyna@codeconcept.pl";
+        private const string username = "katarzyna.palusik";
+        private const string correctPassword = "$AdminAdmin123";
+        private const string incorrectUsername = "user";
+        private const string incorrectPassword = "test";
+        private string  zalogowany => driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p:first-of-type")).Text;
+        private string error => driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
         [SetUp]
         public void Setup()
         {
             driver = new ChromeDriver();
             Start.Setup(driver);
+            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
+            Button.InfoList(driver).Click();
 
         }
 
         [Test]
         public void SearchTest()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
-            Button.InfoList(driver);
             IWebElement search = Field.Search(driver);
             search.SendKeys("Fuerteventura");
             search.Clear();
@@ -39,57 +46,35 @@ namespace KursSelenium.Tests.DriverMethods
         [Test]
         public void SuccessLoginEmail()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna.palusik@codeconcept.pl");
-            Field.Password(driver).SendKeys("$AdminAdmin123");
-            Button.LogIn(driver).Click();
-            String zalogowany = driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p:first-of-type")).Text;
+            Login(correctEmail, correctPassword);
             Assert.IsTrue(zalogowany.Contains("katarzyna.palusik"), "Niepoprawny użytkownik");
 
         }
         [Test]
-        public void SuccessLoginUseName()
+        public void SuccessLoginUserName()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna.palusik");
-            Field.Password(driver).SendKeys("$AdminAdmin123");
-            Button.LogIn(driver).Click();
-            String zalogowany = driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p")).Text;
+            Login(username, correctPassword);
             Assert.IsTrue(zalogowany.Contains("katarzyna.palusik"), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void BothFieldsAreEmpty()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login("", "");
             Assert.IsTrue(error.Contains("Nazwa użytkownika jest wymagana."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void BothFieldsAreIncorrect()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("user");
-            Field.Password(driver).SendKeys("test");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login(incorrectUsername, incorrectPassword);
             Assert.IsTrue(error.Contains("Brak user wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void UserNameIsEmpty()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Password(driver).SendKeys("$AdminAdmin123");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login("", correctPassword);
             Assert.IsTrue(error.Contains("Nazwa użytkownika jest wymagana."), "Niepoprawny użytkownik");
 
         }
@@ -97,59 +82,35 @@ namespace KursSelenium.Tests.DriverMethods
         [Test]
         public void PasswordIsEmpty()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna.palusik");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login(username, "");
             Assert.IsTrue(error.Contains("Hasło jest puste."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void PasswordIsIncorrectUserNameLogin()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna.palusik");
-            Field.Password(driver).SendKeys("$Admin");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login(username, incorrectPassword);
             Assert.IsTrue(error.Contains("Wprowadzone hasło dla użytkownika katarzyna.palusik jest niepoprawne"), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void PasswordIsIncorrectEmailLogin()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna.palusik@codeconcept.pl");
-            Field.Password(driver).SendKeys("$Admin");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login(correctEmail, incorrectPassword);
             Assert.IsTrue(error.Contains("Dla adresu email katarzyna.palusik@codeconcept.pl podano nieprawidłowe hasło."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void UserNameIsIncorrect()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("katarzyna");
-            Field.Password(driver).SendKeys("$AdminAdmin123");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
-            Assert.IsTrue(error.Contains("Brak katarzyna wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
+            Login(incorrectUsername, correctPassword);
+            Assert.IsTrue(error.Contains("Brak user wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void WrongEmail()
         {
-            driver.Navigate().GoToUrl(Url.FakestoreMyAccount());
-            Button.InfoList(driver).Click();
-            Field.Username(driver).SendKeys("t@onet.pl");
-            Field.Password(driver).SendKeys("$AdminAdmin123");
-            Button.LogIn(driver).Click();
-            String error = driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
+            Login(incorrectEmail, correctPassword);
             Assert.IsTrue(error.Contains("Nieznany adres email. Proszę sprawdzić ponownie lub wypróbować swoją nazwę użytkownika."), "Niepoprawny użytkownik");
 
         }
@@ -157,6 +118,13 @@ namespace KursSelenium.Tests.DriverMethods
         public void Quit()
         {
             driver.Quit();
+        }
+        private void Login(string username,string password)
+        {
+            Field.Username(driver).SendKeys(username);
+            Field.Password(driver).SendKeys(password);
+            Button.LogIn(driver).Click();
+
         }
     }
 
