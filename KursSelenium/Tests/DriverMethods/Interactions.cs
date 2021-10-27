@@ -47,14 +47,14 @@ namespace KursSelenium.Tests.DriverMethods
         public void SuccessLoginEmail()
         {
             Login(correctEmail, correctPassword);
-            Assert.IsTrue(zalogowany.Contains("katarzyna.palusik"), "Niepoprawny użytkownik");
+            Assert.IsTrue(zalogowany.Contains(username), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void SuccessLoginUserName()
         {
             Login(username, correctPassword);
-            Assert.IsTrue(zalogowany.Contains("katarzyna.palusik"), "Niepoprawny użytkownik");
+            Assert.IsTrue(zalogowany.Contains(username), "Niepoprawny użytkownik");
 
         }
         [Test]
@@ -68,7 +68,7 @@ namespace KursSelenium.Tests.DriverMethods
         public void BothFieldsAreIncorrect()
         {
             Login(incorrectUsername, incorrectPassword);
-            Assert.IsTrue(error.Contains("Brak user wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Brak "+incorrectUsername+" wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."), "Niepoprawny użytkownik");
 
         }
         [Test]
@@ -90,21 +90,21 @@ namespace KursSelenium.Tests.DriverMethods
         public void PasswordIsIncorrectUserNameLogin()
         {
             Login(username, incorrectPassword);
-            Assert.IsTrue(error.Contains("Wprowadzone hasło dla użytkownika katarzyna.palusik jest niepoprawne"), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Wprowadzone hasło dla użytkownika " +username+" jest niepoprawne"), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void PasswordIsIncorrectEmailLogin()
         {
             Login(correctEmail, incorrectPassword);
-            Assert.IsTrue(error.Contains("Dla adresu email katarzyna.palusik@codeconcept.pl podano nieprawidłowe hasło."), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Dla adresu email "+correctEmail+" podano nieprawidłowe hasło."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void UserNameIsIncorrect()
         {
             Login(incorrectUsername, correctPassword);
-            Assert.IsTrue(error.Contains("Brak user wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Brak "+incorrectUsername+" wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
 
         }
         [Test]

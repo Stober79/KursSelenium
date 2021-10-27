@@ -7,14 +7,16 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-
+using OpenQA.Selenium.Support.UI;
 
 namespace KursSelenium.Tests.DriverMethods
 {
     class Navigation
     {
        
+        
             IWebDriver driver;
+            WebDriverWait wait;
 
             [SetUp]
 
@@ -22,6 +24,7 @@ namespace KursSelenium.Tests.DriverMethods
             {
                 driver = new ChromeDriver();
                 Start.Setup(driver);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             }
 
             [Test]
@@ -41,6 +44,7 @@ namespace KursSelenium.Tests.DriverMethods
                 Assert.AreEqual(expctedUrl, driver.Url, "Url does not match");
                 driver.FindElement(By.ClassName("cmp-intro_acceptAll")).Click();
                 driver.FindElement(By.XPath("//a[@href='http://poczta.onet.pl/']")).Click();
+                wait.Until(driver => driver.FindElement((By.Id("mailFormLogin"))).Displayed);
                 driver.FindElement(By.Id("mailFormLogin")).SendKeys("robertsteiman@op.pl");
                 driver.FindElement(By.Id("mailFormPassword")).SendKeys("Jung1979!");
                 driver.FindElement(By.XPath("//input[(@class='loginButton')]")).Click();
