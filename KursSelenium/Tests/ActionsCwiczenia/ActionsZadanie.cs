@@ -68,7 +68,6 @@ namespace KursSelenium.Tests.ActionsCwiczenia
             {
                if(listElements[i].GetAttribute("class") == "ui-state-default ui-selectee ui-selected")
                 {
-                    string containColor = listElements[i].GetCssValue("background-color");
                     Assert.AreEqual("rgba(243, 152, 20, 1)", listElements[i].GetCssValue("background-color"),"Color does not change");
                }
             }
