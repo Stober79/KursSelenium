@@ -10,6 +10,10 @@ namespace KursSelenium.Element
         {
             return "https://www.nasa.gov/";
         }
+        public static string FakeStoreAction()
+        {
+            return "https://fakestore.testelka.pl/actions/";
+        }
         public static string WikipediaPl()
         {
             return "https://pl.wikipedia.org";

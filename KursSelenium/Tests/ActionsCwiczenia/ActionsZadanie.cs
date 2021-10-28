@@ -20,7 +20,7 @@ namespace KursSelenium.Tests.ActionsCwiczenia
         {
             driver = new ChromeDriver();
             Start.Setup(driver);
-            driver.Navigate().GoToUrl("https://fakestore.testelka.pl/actions/");
+            driver.Navigate().GoToUrl(Url.FakeStoreAction());
             Button.InfoList(driver).Click();
             action = new Actions(driver);
 
