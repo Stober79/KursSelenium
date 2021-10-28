@@ -63,7 +63,7 @@ namespace KursSelenium.Advance.AdvanceFrames
             driver.FindElement(By.CssSelector("p>a.button")).Click();
             driver.SwitchTo().ParentFrame().SwitchTo().ParentFrame();
             driver.FindElement(By.CssSelector("a[name='climbing']")).Click();
-            bool isDisplayd = driver.FindElement(By.CssSelector("image.custom-logo")).Displayed;
+            bool isDisplayd = driver.FindElement(By.CssSelector("img.custom-logo")).Displayed;
             Assert.IsTrue(isDisplayd, "Image is not displayed");
 
         }
