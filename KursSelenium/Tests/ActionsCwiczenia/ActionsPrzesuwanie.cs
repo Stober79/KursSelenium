@@ -4,9 +4,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ActionsCwiczenia
 {
@@ -61,7 +58,7 @@ namespace KursSelenium.Tests.ActionsCwiczenia
         [Test]
         public void Test2()
         {
-            action.ClickAndHold(drag).MoveByOffset(198,87).Release().Build().Perform();
+            action.ClickAndHold(drag).MoveByOffset(198, 87).Release().Build().Perform();
             string wasDropped = "Dropped!";
             Assert.AreEqual(wasDropped, dropped, "Element is not dropped in correct place.");
         }

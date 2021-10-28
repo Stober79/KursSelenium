@@ -3,9 +3,6 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Advance.AdvanceFrames
 {
@@ -32,7 +29,7 @@ namespace KursSelenium.Advance.AdvanceFrames
             driver.SwitchTo().Frame("main-frame");
             bool isButtonEnabled = driver.FindElement(By.CssSelector("input[name='main-page']")).Enabled;
             Assert.IsFalse(isButtonEnabled, "Button is enabled");
-            
+
         }
         [Test]
         public void Test2()
@@ -41,7 +38,7 @@ namespace KursSelenium.Advance.AdvanceFrames
             driver.SwitchTo().Frame("image");
             string tekst = driver.FindElement(By.XPath(".//img[@alt='Wakacje']/..")).GetAttribute("href");
             string expected = "https://fakestore.testelka.pl/";
-            Assert.AreEqual(expected, tekst,"Niepoprawny link");
+            Assert.AreEqual(expected, tekst, "Niepoprawny link");
 
         }
         [Test]

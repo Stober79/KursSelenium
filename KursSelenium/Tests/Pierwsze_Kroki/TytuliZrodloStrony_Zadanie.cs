@@ -3,9 +3,6 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.Pierwsze_Kroki
 {
@@ -36,7 +33,7 @@ namespace KursSelenium.Tests.Pierwsze_Kroki
         {
             driver.Navigate().GoToUrl(Url.WikipediaEs());
             string content = "lang=\"es\"";
-            Assert.IsTrue(driver.PageSource.Contains(content),"Page Source does not contain this text");
+            Assert.IsTrue(driver.PageSource.Contains(content), "Page Source does not contain this text");
         }
 
         [TearDown]

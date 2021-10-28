@@ -4,16 +4,12 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.DriverMethods
 {
     class WaitsZadanie
     {
         IWebDriver driver;
-        WebDriverWait wait;
 
         [SetUp]
         public void Setup()

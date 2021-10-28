@@ -4,9 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace KursSelenium.Tests.DriverMethods
 {
@@ -18,7 +16,7 @@ namespace KursSelenium.Tests.DriverMethods
         [SetUp]
         public void Setup()
         {
-            
+
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
@@ -44,7 +42,7 @@ namespace KursSelenium.Tests.DriverMethods
             string amount = driver.FindElement(By.CssSelector(".order-total .amount")).Text;
             string expected = "6 400,00 zł";
             Assert.AreEqual(expected, amount, "Total price is not correct.");
-            
+
         }
         [Test]
 

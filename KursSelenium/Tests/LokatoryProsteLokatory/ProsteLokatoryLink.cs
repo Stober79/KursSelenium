@@ -3,9 +3,6 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.LokatoryProsteLokatory
 {
@@ -42,7 +39,7 @@ namespace KursSelenium.Tests.LokatoryProsteLokatory
             Button.InfoList(driver).Click();
             Button.AddToCart(driver).Click();
             Button.GoToCart(driver).Click();
-            Assert.DoesNotThrow(()=> Element.Button.GoToPayment(driver), "Go to Payment not found");//wyrazenie Lambda
+            Assert.DoesNotThrow(() => Element.Button.GoToPayment(driver), "Go to Payment not found");//wyrazenie Lambda
 
 
         }
@@ -52,7 +49,7 @@ namespace KursSelenium.Tests.LokatoryProsteLokatory
         {
             driver.Navigate().GoToUrl(Url.FakestoreCart());//pusty koszyk
             Button.InfoList(driver).Click();
-            Assert.Throws < NoSuchElementException>(()=> Button.GoToPayment(driver), "Go to payment link was not found");//wyrazenie Lambda
+            Assert.Throws<NoSuchElementException>(() => Button.GoToPayment(driver), "Go to payment link was not found");//wyrazenie Lambda
 
 
         }

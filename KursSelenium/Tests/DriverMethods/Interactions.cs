@@ -3,9 +3,6 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.DriverMethods
 {
@@ -18,7 +15,7 @@ namespace KursSelenium.Tests.DriverMethods
         private const string correctPassword = "$AdminAdmin123";
         private const string incorrectUsername = "user";
         private const string incorrectPassword = "test";
-        private string  zalogowany => driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p:first-of-type")).Text;
+        private string zalogowany => driver.FindElement(By.CssSelector("div.woocommerce-MyAccount-content>p:first-of-type")).Text;
         private string error => driver.FindElement(By.CssSelector("ul.woocommerce-error")).Text;
         [SetUp]
         public void Setup()
@@ -68,7 +65,7 @@ namespace KursSelenium.Tests.DriverMethods
         public void BothFieldsAreIncorrect()
         {
             Login(incorrectUsername, incorrectPassword);
-            Assert.IsTrue(error.Contains("Brak "+incorrectUsername+" wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Brak " + incorrectUsername + " wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."), "Niepoprawny użytkownik");
 
         }
         [Test]
@@ -90,21 +87,21 @@ namespace KursSelenium.Tests.DriverMethods
         public void PasswordIsIncorrectUserNameLogin()
         {
             Login(username, incorrectPassword);
-            Assert.IsTrue(error.Contains("Wprowadzone hasło dla użytkownika " +username+" jest niepoprawne"), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Wprowadzone hasło dla użytkownika " + username + " jest niepoprawne"), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void PasswordIsIncorrectEmailLogin()
         {
             Login(correctEmail, incorrectPassword);
-            Assert.IsTrue(error.Contains("Dla adresu email "+correctEmail+" podano nieprawidłowe hasło."), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Dla adresu email " + correctEmail + " podano nieprawidłowe hasło."), "Niepoprawny użytkownik");
 
         }
         [Test]
         public void UserNameIsIncorrect()
         {
             Login(incorrectUsername, correctPassword);
-            Assert.IsTrue(error.Contains("Brak "+incorrectUsername+" wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
+            Assert.IsTrue(error.Contains("Brak " + incorrectUsername + " wśród zarejestrowanych w witrynie użytkowników"), "Niepoprawny użytkownik");
 
         }
         [Test]
@@ -119,7 +116,7 @@ namespace KursSelenium.Tests.DriverMethods
         {
             driver.Quit();
         }
-        private void Login(string username,string password)
+        private void Login(string username, string password)
         {
             Field.Username(driver).SendKeys(username);
             Field.Password(driver).SendKeys(password);

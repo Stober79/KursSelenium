@@ -1,11 +1,8 @@
-﻿using NUnit.Framework;
+﻿using KursSelenium.Element;
+using KursSelenium.StartSetup;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using KursSelenium.Element;
-using KursSelenium.StartSetup;
 
 namespace KursSelenium.Tests.LokatorySelektoryCSS
 {

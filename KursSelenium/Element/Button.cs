@@ -1,7 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Element
 {
@@ -33,7 +30,7 @@ namespace KursSelenium.Element
 
         public static IWebElement GoToPayment(IWebDriver driver)
         {
-            IWebElement element = driver.FindElement((By.LinkText("Przejdź do płatności"))); 
+            IWebElement element = driver.FindElement((By.LinkText("Przejdź do płatności")));
             return element;
         }
         public static IWebElement LogIn(IWebDriver driver)

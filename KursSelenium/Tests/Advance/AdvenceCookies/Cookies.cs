@@ -4,9 +4,9 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace KursSelenium.Advance.AdvenceJavaScript
+namespace KursSelenium.Tests.Advance.AdvenceCookies
 {
-    class JavaScriptZadanie
+    class Cookies
     {
         IWebDriver driver;
         IJavaScriptExecutor jse;
@@ -28,11 +28,7 @@ namespace KursSelenium.Advance.AdvenceJavaScript
         [Test]
         public void Test()
         {
-            IWebElement opis = driver.FindElement(By.CssSelector("#tab-description"));
-            jse.ExecuteScript("arguments[0].scrollIntoView(true)", opis);
-            IWebElement stickyAddToCart = driver.FindElement(By.CssSelector(".storefront-sticky-add-to-cart"));
-            Assert.IsTrue(stickyAddToCart.GetAttribute("class").Contains("storefront-sticky-add-to-cart--slideInDown"), "List is not visble.");
+
         }
     }
-
 }

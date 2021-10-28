@@ -1,10 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace KursSelenium.Tests.Pierwsze_Kroki
 {
@@ -24,7 +21,7 @@ namespace KursSelenium.Tests.Pierwsze_Kroki
         public void WindowPositionTest()
         {
             Point start = driver.Manage().Window.Position;
-            Assert.AreEqual(new Point(10, 10), start,"Start point is not correct");
+            Assert.AreEqual(new Point(10, 10), start, "Start point is not correct");
         }
         [Test]
         public void WindowSizeTest()

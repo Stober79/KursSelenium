@@ -2,10 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace KursSelenium.Tests.Pierwsze_Kroki
 {
@@ -20,7 +17,7 @@ namespace KursSelenium.Tests.Pierwsze_Kroki
             driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
             driver.Manage().Timeouts().PageLoad = System.TimeSpan.FromSeconds(10);
             driver.Manage().Window.Position = new Point(445, 30);
-            driver.Manage().Window.Size = new Size(854,480);
+            driver.Manage().Window.Size = new Size(854, 480);
         }
 
         [Test]

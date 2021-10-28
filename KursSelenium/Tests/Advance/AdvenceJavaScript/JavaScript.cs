@@ -4,9 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace KursSelenium.Advance.AdvenceJavaScript
 {
@@ -33,7 +31,7 @@ namespace KursSelenium.Advance.AdvenceJavaScript
         public void ClicButtonTest()
         {
             jse.ExecuteScript("console.log('test')");//console.log(;jfgjkd') to Jscript wyświtlający w konsoli podany tekst
-            string tekst = (string) jse.ExecuteScript("return 'To tylko tekst'");//zwaraca tekst potrzebne rzutowanie
+            string tekst = (string)jse.ExecuteScript("return 'To tylko tekst'");//zwaraca tekst potrzebne rzutowanie
             IWebElement adToCartBUtton = driver.FindElement(By.CssSelector("[name='add-to-cart']"));
             jse.ExecuteScript("arguments[0].click()", adToCartBUtton);//arguments[0] to podajemy w ktory argument podany w liście ma kliknąć
 

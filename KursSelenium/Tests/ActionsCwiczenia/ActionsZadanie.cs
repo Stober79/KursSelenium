@@ -4,9 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ActionsCwiczenia
 {
@@ -50,9 +48,9 @@ namespace KursSelenium.Tests.ActionsCwiczenia
             IWebElement field = driver.FindElement(By.CssSelector("#input"));
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", field);
             IWebElement button = driver.FindElement(By.CssSelector("button[onclick='zatwierdzTekst()']"));
-            action.SendKeys(field,"test3").Click(button).Build().Perform();
+            action.SendKeys(field, "test3").Click(button).Build().Perform();
             string tekst = driver.FindElement(By.CssSelector("#output")).Text;
-            Assert.AreEqual("Wprowadzony tekst: "+testString, tekst, "Output is not correct.");
+            Assert.AreEqual("Wprowadzony tekst: " + testString, tekst, "Output is not correct.");
         }
 
         [Test]
@@ -64,12 +62,12 @@ namespace KursSelenium.Tests.ActionsCwiczenia
             IList<IWebElement> listElements = list.FindElements(By.CssSelector("li"));
             action.KeyDown(Keys.Control).Click(listElements[2]).Click(listElements[3]).Click(listElements[5]).KeyUp(Keys.Control).Build().Perform();
 
-            for (i = 0;i< listElements.Count;i++)
+            for (i = 0; i < listElements.Count; i++)
             {
-               if(listElements[i].GetAttribute("class") == "ui-state-default ui-selectee ui-selected")
+                if (listElements[i].GetAttribute("class") == "ui-state-default ui-selectee ui-selected")
                 {
-                    Assert.AreEqual("rgba(243, 152, 20, 1)", listElements[i].GetCssValue("background-color"),"Color does not change");
-               }
+                    Assert.AreEqual("rgba(243, 152, 20, 1)", listElements[i].GetCssValue("background-color"), "Color does not change");
+                }
             }
         }
 

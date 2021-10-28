@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KursSelenium.Element
+﻿namespace KursSelenium.Element
 {
     class Url
     {

@@ -4,9 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ActionsCwiczenia
 {
@@ -27,7 +25,7 @@ namespace KursSelenium.Tests.ActionsCwiczenia
         public void ExampleSelectedTest()
         {
             Actions action = new Actions(driver);
-            action.MoveByOffset(500,600).Click().Build().Perform();
+            action.MoveByOffset(500, 600).Click().Build().Perform();
         }
         [Test]
         public void ContextClickTest()
@@ -71,7 +69,7 @@ namespace KursSelenium.Tests.ActionsCwiczenia
             IList<IWebElement> listElements = list.FindElements(By.CssSelector("li"));
             Actions action = new Actions(driver);
             action.KeyDown(Keys.Control).Click(listElements[2]).Click(listElements[3]).KeyUp(Keys.Control).Build().Perform();
- 
+
 
         }
         [TearDown]
@@ -79,6 +77,6 @@ namespace KursSelenium.Tests.ActionsCwiczenia
         {
             driver.Quit();
         }
-            
+
     }
 }
