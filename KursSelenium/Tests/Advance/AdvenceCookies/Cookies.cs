@@ -27,8 +27,7 @@ namespace KursSelenium.Tests.Advance.AdvenceCookies
         }
         [Test]
         public void Test()
-        {
-            driver.FindElement(By.CssSelector(""));
+        { 
 
         }
     }
