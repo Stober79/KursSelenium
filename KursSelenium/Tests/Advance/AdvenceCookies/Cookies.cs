@@ -51,7 +51,7 @@ namespace KursSelenium.Tests.Advance.AdvenceCookies
         [Test]
         public void DeleteCookieNamed()
         {
-           
+
             driver.Manage().Cookies.DeleteCookieNamed("store_noticef7db772cd2958546f5ffc7e2822d64e8");
             int numberOfCookies = driver.Manage().Cookies.AllCookies.Count;
             Assert.AreEqual(2, numberOfCookies, "NUmber of cookies is not what expected");

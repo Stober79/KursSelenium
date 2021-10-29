@@ -1,12 +1,9 @@
-﻿using KursSelenium.Element;
-using KursSelenium.StartSetup;
+﻿using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.Advance.AdvenceAlerts
 {

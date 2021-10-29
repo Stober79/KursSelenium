@@ -40,7 +40,7 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
         [Test]
         public void Test2()
         {
-            driver.FindElement(By.CssSelector("button[onclick='confirmFunction()']")).Click();  
+            driver.FindElement(By.CssSelector("button[onclick='confirmFunction()']")).Click();
             driver.SwitchTo().Alert().Dismiss();
             text = driver.FindElement(By.CssSelector("p#demo")).Text;
             Assert.AreEqual("Wybrana opcja to Cancel!", text, "Nie wybrano OK");
@@ -78,7 +78,7 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
             wait.Until(d =>
                 {
                     try { return driver.SwitchTo().Alert(); }
-                    catch  (NoAlertPresentException) { return null; }
+                    catch (NoAlertPresentException) { return null; }
                 });
             text = driver.SwitchTo().Alert().Text;
             driver.SwitchTo().Alert().Accept();
