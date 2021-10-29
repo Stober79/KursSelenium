@@ -3,6 +3,7 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,6 +44,19 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
         {
             jse.ExecuteScript("prompt('Wpisz cokolwiek')");
             driver.SwitchTo().Alert().SendKeys("coś tam");
+            driver.SwitchTo().Alert().Accept();
+        }
+        [Test]
+        public void WaitForAlert()
+        {
+            jse.ExecuteScript("setTimeout(function(){alert('Wpisz cokolwiek');},300);");
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(d =>
+            {
+                try { return driver.SwitchTo().Alert(); }
+                catch (NoAlertPresentException) { return null; }
+            });
             driver.SwitchTo().Alert().Accept();
         }
     }
