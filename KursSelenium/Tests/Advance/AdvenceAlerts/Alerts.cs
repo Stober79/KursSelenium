@@ -19,8 +19,6 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
         {
             driver = new ChromeDriver();
             Start.Setup(driver);
-            driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
-            Button.InfoList(driver).Click();
             jse = (IJavaScriptExecutor)driver;
         }
         [TearDown]
@@ -29,9 +27,23 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
             driver.Quit();
         }
         [Test]
-        public void Test()
+        public void AlertTest()
         {
-
+            jse.ExecuteScript("alert('Cześć jestem alertem')");
+            driver.SwitchTo().Alert().Accept();
+        }
+        [Test]
+        public void ConfirmTest()
+        {
+            jse.ExecuteScript("confirm('Wybierz OK lub Anuluj')");
+            driver.SwitchTo().Alert().Dismiss();
+        }
+        [Test]
+        public void PromptTest()
+        {
+            jse.ExecuteScript("prompt('Wpisz cokolwiek')");
+            driver.SwitchTo().Alert().SendKeys("coś tam");
+            driver.SwitchTo().Alert().Accept();
         }
     }
 }
