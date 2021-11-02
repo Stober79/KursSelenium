@@ -12,7 +12,6 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
     class AlertZadanie
     {
         IWebDriver driver;
-        IJavaScriptExecutor jse;
         string text;
 
         [SetUp]
@@ -20,7 +19,6 @@ namespace KursSelenium.Tests.Advance.AdvenceAlerts
         {
             driver = new ChromeDriver();
             Start.Setup(driver);
-            jse = (IJavaScriptExecutor)driver;
             driver.Navigate().GoToUrl("https://fakestore.testelka.pl/alerty/");
             Button.InfoList(driver).Click();
         }
