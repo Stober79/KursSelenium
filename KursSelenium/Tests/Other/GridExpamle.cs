@@ -3,6 +3,7 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace KursSelenium.Tests.Other
     class GridExpamle
     {
         RemoteWebDriver driver;
+        DriverOptions options;
 
         [SetUp]
         public void Setup()
         {
-            DriverOptions options = new ChromeOptions();
-            driver = new RemoteWebDriver(options);//w tym miejscu wpisujemy adres klineta lub używamy Options jeśli client jest lokalnie
+            options = new ChromeOptions();
+            options.PlatformName = "WINDOWS";
+            //driver = new RemoteWebDriver(options);//w tym miejscu wpisujemy adres klineta lub używamy Options jeśli client jest lokalnie
+            driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
             Start.Setup(driver);
         }
         [TearDown]
