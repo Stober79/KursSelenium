@@ -3,6 +3,7 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -34,6 +35,7 @@ namespace KursSelenium.TestProject
         public void Setup()
         {
             options = new ChromeOptions();
+            //options = new FirefoxOptions();
             driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
             Start.Setup(driver);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
@@ -135,15 +137,12 @@ namespace KursSelenium.TestProject
         public void AddMoreThanMaxItemsTest()
         {
             AddItemsToTheCart("1", "section.storefront-recent-products li.post-4116");
+            string stock = driver.FindElement(By.CssSelector("p.stock")).Text;
             GoToCart.Click();
-            int maxNumber =  Convert.ToInt32(("max"))+1;
+            int maxNumber =  Convert.ToInt32(stock.Replace(" w magazynie","")) + 1;
             ChangeQty(maxNumber);
             bool isOverMax = (bool)jse.ExecuteScript("return arguments[0].validity.rangeOverflow", Qty);
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual("rgba(127, 84, 179, 1)", Qty.GetCssValue("outline-color"), "The color frame does not change to purple.");
-                Assert.IsTrue(isOverMax, "blelel");
-            });
+           Assert.IsTrue(isOverMax, "blelel");
 
         }
 

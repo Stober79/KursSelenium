@@ -3,6 +3,7 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -19,7 +20,7 @@ namespace KursSelenium.TestProject
         DriverOptions options;
         WebDriverWait wait;
         string cardNumber = "4242424242424242";
-        string data = "02/22";
+        string data = "0222";
         string cardCode = "123";
         string baseUrl = "https://fakestore.testelka.pl";
         IList<string> productsUrls = new List<string>()
@@ -76,7 +77,8 @@ namespace KursSelenium.TestProject
         [SetUp]
         public void Setup()
        {
-            options = new ChromeOptions();
+            //options = new ChromeOptions();
+            options = new FirefoxOptions();
             driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             Start.Setup(driver);
@@ -195,6 +197,7 @@ namespace KursSelenium.TestProject
             PhoneField.SendKeys("123-456-789");
             EmailField.SendKeys("test@t.op");
             EnterPayCardData();
+            WaitForElementDisappear(Loaders);
             ReadCheckbox.Click();
             BuyAndPay.Click();
             WaitForElementDisappear(Loaders);
