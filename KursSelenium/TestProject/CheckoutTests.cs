@@ -2,15 +2,12 @@
 using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KursSelenium.TestProject
 {
@@ -76,7 +73,7 @@ namespace KursSelenium.TestProject
 
         [SetUp]
         public void Setup()
-       {
+        {
             //options = new ChromeOptions();
             options = new FirefoxOptions();
             driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
@@ -95,7 +92,7 @@ namespace KursSelenium.TestProject
         {
             driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
             AddFuerteventuraSotaventoToTheCart();
-            _ =CheckoutForm;
+            _ = CheckoutForm;
             EnterPayCardData();
             BuyAndPay.Click();
             WaitForElementDisappear(Loaders);
@@ -110,7 +107,7 @@ namespace KursSelenium.TestProject
                 "Adres email płatnika jest wymaganym polem.",
                  "Proszę przeczytać i zaakceptować regulamin sklepu aby móc sfinalizować zamówienie."
             };
-            Assert.Multiple(()=>
+            Assert.Multiple(() =>
             {
                 Assert.DoesNotThrow(() => _ = ErrorList, "Error list was not found");
                 Assert.AreEqual(errorList.OrderBy(element => element), errorList.OrderBy(element => element), "Inccorect massages.");
@@ -120,7 +117,7 @@ namespace KursSelenium.TestProject
         [Test]
         public void ReciveOneProductTest()
         {
-            driver.Navigate().GoToUrl(baseUrl+productsUrls[0]);
+            driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
             AddFuerteventuraSotaventoToTheCart();
             _ = CheckoutForm;
             float tax = CalculateTax(productPrices[0]);
@@ -128,7 +125,7 @@ namespace KursSelenium.TestProject
             {
                 Assert.AreEqual(productPriceText[0], ProductsTotalElement.Text, "Incorrect price .");
                 Assert.AreEqual(productPriceText[0], CartSubtotalElement.Text, "Incorrect price.");
-                Assert.AreEqual(productPriceText[0]+" (zawiera "+FormatNumber(tax)+" VAT)",OrderTotalElement.Text, "Incorrect vat.");
+                Assert.AreEqual(productPriceText[0] + " (zawiera " + FormatNumber(tax) + " VAT)", OrderTotalElement.Text, "Incorrect vat.");
             });
 
 
@@ -136,7 +133,7 @@ namespace KursSelenium.TestProject
         [Test]
         public void ReciveTwoProductTest()
         {
-            driver.Navigate().GoToUrl(baseUrl+productsUrls[0]);
+            driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
             QuantityField.Clear();
             QuantityField.SendKeys("2");
             AddToCart.Click();
@@ -150,7 +147,7 @@ namespace KursSelenium.TestProject
             float price = productPrices[0] * 2 + productPrices[1] * 3;
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(FormatNumber(productPrices[0]*2), ProductsTotalElements[0].Text, "Incorrect price .");
+                Assert.AreEqual(FormatNumber(productPrices[0] * 2), ProductsTotalElements[0].Text, "Incorrect price .");
                 Assert.AreEqual(FormatNumber(productPrices[0] * 2), ProductsTotalElements[0].Text, "Incorrect price .");
                 Assert.AreEqual(FormatNumber(productPrices[1] * 3), ProductsTotalElements[1].Text, "Incorrect price .");
                 Assert.AreEqual(FormatNumber(price), CartSubtotalElement.Text, "Incorrect price.");
@@ -170,7 +167,7 @@ namespace KursSelenium.TestProject
             WaitForElementDisappear(Loaders);
             GoToPayment.Click();
             _ = CheckoutForm;
-            float tax = CalculateTax(productPrices[0]*2);
+            float tax = CalculateTax(productPrices[0] * 2);
             Assert.Multiple(() =>
             {
                 Assert.AreEqual(FormatNumber(productPrices[0] * 2), ProductsTotalElement.Text, "Incorrect price .");
@@ -187,7 +184,7 @@ namespace KursSelenium.TestProject
             AddToCart.Click();
             GoToCart.Click();
             GoToPayment.Click();
-             _ = CheckoutForm;
+            _ = CheckoutForm;
             FirstNameField.SendKeys("Katarzyna");
             LastNameField.SendKeys("Palusik");
             CompanyField.SendKeys("CC");
@@ -212,7 +209,7 @@ namespace KursSelenium.TestProject
             GoToCart.Click();
             GoToPayment.Click();
             UserLogin.Click();
-            _ = wait.Until(d=>LoginForm.Displayed);
+            _ = wait.Until(d => LoginForm.Displayed);
             UsernameField.SendKeys("katarzyna.palusik");
             PasswordField.SendKeys("$AdminAdmin123");
             LoginButton.Click();
@@ -243,18 +240,18 @@ namespace KursSelenium.TestProject
         }
         private void AddFuerteventuraSotaventoToTheCart()
         {
-           
+
             AddToCart.Click();
             GoToCart.Click();
             GoToPayment.Click();
         }
         private float CalculateTax(float productPrice)
         {
-            return (float)Math.Round(productPrice - (productPrice / 1.23),2);
+            return (float)Math.Round(productPrice - (productPrice / 1.23), 2);
         }
         private string FormatNumber(float number)
         {
-            return string.Format("{0:### ###.00}", number) +" zł";
+            return string.Format("{0:### ###.00}", number) + " zł";
         }
         private void EnterPayCardData()
         {

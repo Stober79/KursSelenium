@@ -6,8 +6,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.KilkaOkien
 {
@@ -40,10 +38,10 @@ namespace KursSelenium.Tests.KilkaOkien
             string documentationWindow = driver.WindowHandles[1];
             driver.SwitchTo().Window(documentationWindow);
             string text = driver.FindElement(By.CssSelector("h1.entry-title")).Text;
-            Assert.AreEqual("Dokumentacja", text, "Nieprawidłowy nagłówek."); 
+            Assert.AreEqual("Dokumentacja", text, "Nieprawidłowy nagłówek.");
             driver.SwitchTo().Window(mainPageWindow);
             driver.FindElement(By.CssSelector("a.privacy-policy-link")).Click();
-             text = driver.FindElement(By.CssSelector("h1.entry-title")).Text;
+            text = driver.FindElement(By.CssSelector("h1.entry-title")).Text;
             Assert.AreEqual("Polityka prywatności", text, "Nieprawidłowy nagłówek.");
         }
         [Test]

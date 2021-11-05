@@ -3,12 +3,10 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.TestProject
 {
@@ -35,7 +33,7 @@ namespace KursSelenium.TestProject
             2999.99f,
             350
         };
-        IWebElement AddtoTheCart => driver.FindElement(By.CssSelector("button[name='add-to-cart']"),2);
+        IWebElement AddtoTheCart => driver.FindElement(By.CssSelector("button[name='add-to-cart']"), 2);
         IWebElement GoToCart => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
         IWebElement CouponCodeField => driver.FindElement(By.CssSelector("#coupon_code"), 2);
         IWebElement CouponMassage => driver.FindElement(By.CssSelector("div.woocommerce-message"), 2);
@@ -43,7 +41,6 @@ namespace KursSelenium.TestProject
         IWebElement CartDiscount => driver.FindElement(By.CssSelector("tr.cart-discount th"), 2);
         IWebElement CartDiscountRow => driver.FindElement(By.CssSelector("tr.cart-discount"), 2);
         IWebElement CartDiscountValue => driver.FindElement(By.CssSelector("tr.cart-discount span"), 2);
-        IWebElement OrderTotal => driver.FindElement(By.CssSelector("tr.order-total"), 2);
         IWebElement OrderTotalWithoutTextElement => driver.FindElement(By.CssSelector("tr.order-total td strong"), 2);
         IList<IWebElement> ErrorList => driver.FindElements(By.CssSelector("ul.woocommerce-error li"), 2);
 
@@ -73,7 +70,7 @@ namespace KursSelenium.TestProject
             {
                 Assert.AreEqual("Kupon został pomyślnie użyty.", CouponMassage.Text, "Coupon was not succesfully apply.");
                 Assert.AreEqual("Kupon: " + minimalCoupnValue, CartDiscount.Text, "Coupon was not apply.");
-                Assert.AreEqual(FormatNumber(productPrices[0] -minimalValueCoupnValue), OrderTotalWithoutTextElement.Text,"Total is not correct");
+                Assert.AreEqual(FormatNumber(productPrices[0] - minimalValueCoupnValue), OrderTotalWithoutTextElement.Text, "Total is not correct");
                 Assert.AreEqual("300,00 zł", CartDiscountValue.Text, "Discount value is not correct.");
             });
         }
@@ -170,7 +167,7 @@ namespace KursSelenium.TestProject
             }
             else return string.Format("{0:### ###.00}", number) + " zł";
         }
-        private void AddCoupon (string coupon)
+        private void AddCoupon(string coupon)
         {
             AddtoTheCart.Click();
             GoToCart.Click();

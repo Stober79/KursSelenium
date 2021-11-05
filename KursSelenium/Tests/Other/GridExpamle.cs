@@ -3,11 +3,8 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.Other
 {

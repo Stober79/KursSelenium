@@ -4,9 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ListaRozwijana
 {
@@ -42,10 +40,10 @@ namespace KursSelenium.Tests.ListaRozwijana
             {
                 Assert.AreEqual(2, selectedOptions.Count);
                 string[] actualText = { selectedOptions[0].Text, selectedOptions[1].Text };
-                Assert.Contains( expectedOptinsText[0], actualText);
-                Assert.Contains( expectedOptinsText[1], actualText);
+                Assert.Contains(expectedOptinsText[0], actualText);
+                Assert.Contains(expectedOptinsText[1], actualText);
             });
-            
+
         }
     }
 }

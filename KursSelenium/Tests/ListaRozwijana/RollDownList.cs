@@ -4,9 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ListaRozwijana
 {
@@ -15,7 +13,7 @@ namespace KursSelenium.Tests.ListaRozwijana
         IWebDriver driver;
         IWebElement element;
         SelectElement selectElement;
-       [SetUp]
+        [SetUp]
         public void Setup()
         {
             driver = new ChromeDriver();
@@ -34,13 +32,13 @@ namespace KursSelenium.Tests.ListaRozwijana
         public void IsMultipleTest()
         {
 
-            Assert.IsTrue(selectElement.IsMultiple,"Is not multiple");
+            Assert.IsTrue(selectElement.IsMultiple, "Is not multiple");
         }
         [Test]
         public void AllOptionsTest()
         {
             int numberOfAllOptions = selectElement.Options.Count;
-            Assert.AreEqual(4,numberOfAllOptions, "Nie odpowiednia ilość opcji.");
+            Assert.AreEqual(4, numberOfAllOptions, "Nie odpowiednia ilość opcji.");
         }
         [Test]
         public void WrappedElementTest()

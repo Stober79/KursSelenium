@@ -3,12 +3,10 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.TestProject
 {
@@ -19,15 +17,15 @@ namespace KursSelenium.TestProject
         WebDriverWait wait;
         IJavaScriptExecutor jse;
         IWebElement addedProduct;
-        IList<IWebElement> listOfProductsInTheCart => driver.FindElements(By.CssSelector("tr.cart_item"),5);
-        IWebElement Qty => driver.FindElement(By.CssSelector(".qty"),2);
-        IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"),2);
-        IWebElement GoToCart => driver.FindElement(By.CssSelector("div.woocommerce-message a"),2);
-        IWebElement MainPage => driver.FindElement(By.CssSelector("li#menu-item-197"),2);
-        IWebElement Cart => driver.FindElement(By.CssSelector("li#menu-item-200"),2);
-        IWebElement CartIsEmpty => driver.FindElement(By.CssSelector("p.cart-empty"),2);
-        IWebElement RemoveProduct => driver.FindElement(By.CssSelector("td.product-remove a"),2);
-        IWebElement AddToCart => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"),2);
+        IList<IWebElement> listOfProductsInTheCart => driver.FindElements(By.CssSelector("tr.cart_item"), 5);
+        IWebElement Qty => driver.FindElement(By.CssSelector(".qty"), 2);
+        IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
+        IWebElement GoToCart => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
+        IWebElement MainPage => driver.FindElement(By.CssSelector("li#menu-item-197"), 2);
+        IWebElement Cart => driver.FindElement(By.CssSelector("li#menu-item-200"), 2);
+        IWebElement CartIsEmpty => driver.FindElement(By.CssSelector("p.cart-empty"), 2);
+        IWebElement RemoveProduct => driver.FindElement(By.CssSelector("td.product-remove a"), 2);
+        IWebElement AddToCart => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
         IWebElement DissmisNoticeLink => driver.FindElement(By.CssSelector(".woocomerce-store_dissmis-link"));
         By Loaders => By.CssSelector(".blocUI");
 
@@ -42,7 +40,7 @@ namespace KursSelenium.TestProject
             driver.Navigate().GoToUrl(Url.FakestoreMainPage());
             Button.InfoList(driver).Click();
             jse = (IJavaScriptExecutor)driver;
-            
+
         }
         [TearDown]
         public void Quit()
@@ -116,7 +114,7 @@ namespace KursSelenium.TestProject
             GoToCart.Click();
             RemoveProduct.Click();
             WaitForElementDisappear(Loaders);
-            Assert.DoesNotThrow(()=>
+            Assert.DoesNotThrow(() =>
             driver.FindElement(By.CssSelector("p.cart-empty")), "There os no \"Empty Cart\" massage. Product was not removed from cart");
 
 
@@ -139,10 +137,10 @@ namespace KursSelenium.TestProject
             AddItemsToTheCart("1", "section.storefront-recent-products li.post-4116");
             string stock = driver.FindElement(By.CssSelector("p.stock")).Text;
             GoToCart.Click();
-            int maxNumber =  Convert.ToInt32(stock.Replace(" w magazynie","")) + 1;
+            int maxNumber = Convert.ToInt32(stock.Replace(" w magazynie", "")) + 1;
             ChangeQty(maxNumber);
             bool isOverMax = (bool)jse.ExecuteScript("return arguments[0].validity.rangeOverflow", Qty);
-           Assert.IsTrue(isOverMax, "blelel");
+            Assert.IsTrue(isOverMax, "blelel");
 
         }
 
@@ -154,7 +152,7 @@ namespace KursSelenium.TestProject
             AddToCart.Click();
         }
         private void ChangeQty(string number)
-        {  
+        {
             Qty.Clear();
             Qty.SendKeys(number);
             UpdateCart.Click();
@@ -166,7 +164,7 @@ namespace KursSelenium.TestProject
             Qty.SendKeys(numerConverted);
             UpdateCart.Click();
         }
-        private void WaitForElementDisappear (By by)
+        private void WaitForElementDisappear(By by)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             try

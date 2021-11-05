@@ -5,8 +5,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KursSelenium.Tests.ListaRozwijana
 {
@@ -22,7 +20,7 @@ namespace KursSelenium.Tests.ListaRozwijana
             driver = new ChromeDriver();
             Start.Setup(driver);
             driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
-            Button.InfoList(driver).Click();     
+            Button.InfoList(driver).Click();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
         }
         [TearDown]
@@ -34,7 +32,7 @@ namespace KursSelenium.Tests.ListaRozwijana
         public void ZadanieTest()
         {
             driver.FindElement(By.CssSelector("button[name='add-to-cart']")).Click();
-            wait.Until(d=> driver.FindElement(By.CssSelector("div.woocommerce-message>a.wc-forward"))).Click();
+            wait.Until(d => driver.FindElement(By.CssSelector("div.woocommerce-message>a.wc-forward"))).Click();
             driver.FindElement(By.CssSelector(".checkout-button")).Click();
             element = driver.FindElement(By.CssSelector("select#billing_country"));
             selectElement = new SelectElement(element);
