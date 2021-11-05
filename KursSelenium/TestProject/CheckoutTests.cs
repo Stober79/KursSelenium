@@ -2,6 +2,7 @@
 using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
@@ -74,8 +75,8 @@ namespace KursSelenium.TestProject
         [SetUp]
         public void Setup()
         {
-            //options = new ChromeOptions();
-            options = new FirefoxOptions();
+            options = new ChromeOptions();
+            //options = new FirefoxOptions();
             driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             Start.Setup(driver);
@@ -91,7 +92,7 @@ namespace KursSelenium.TestProject
         public void FieldsValidationTest()
         {
             driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
-            AddFuerteventuraSotaventoToTheCart();
+            AddToTheCart();
             _ = CheckoutForm;
             EnterPayCardData();
             BuyAndPay.Click();
@@ -118,7 +119,7 @@ namespace KursSelenium.TestProject
         public void ReciveOneProductTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddFuerteventuraSotaventoToTheCart();
+            AddToTheCart();
             _ = CheckoutForm;
             float tax = CalculateTax(productPrices[0]);
             Assert.Multiple(() =>
@@ -134,15 +135,11 @@ namespace KursSelenium.TestProject
         public void ReciveTwoProductTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            QuantityField.Clear();
-            QuantityField.SendKeys("2");
+            ChangeQty("2");
             AddToCart.Click();
             driver.Navigate().GoToUrl(baseUrl + productsUrls[1]);
-            QuantityField.Clear();
-            QuantityField.SendKeys("3");
-            AddToCart.Click();
-            GoToCart.Click();
-            GoToPayment.Click();
+            ChangeQty("3");
+            AddToTheCart();
             _ = CheckoutForm;
             float price = productPrices[0] * 2 + productPrices[1] * 3;
             Assert.Multiple(() =>
@@ -161,8 +158,7 @@ namespace KursSelenium.TestProject
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
             AddToCart.Click();
             GoToCart.Click();
-            QuantityField.Clear();
-            QuantityField.SendKeys("2");
+            ChangeQty("2");
             UpdateCart.Click();
             WaitForElementDisappear(Loaders);
             GoToPayment.Click();
@@ -181,9 +177,7 @@ namespace KursSelenium.TestProject
         public void SuccesfulPaymentTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddToCart.Click();
-            GoToCart.Click();
-            GoToPayment.Click();
+            AddToTheCart();
             _ = CheckoutForm;
             FirstNameField.SendKeys("Katarzyna");
             LastNameField.SendKeys("Palusik");
@@ -195,8 +189,7 @@ namespace KursSelenium.TestProject
             EmailField.SendKeys("test@t.op");
             EnterPayCardData();
             WaitForElementDisappear(Loaders);
-            ReadCheckbox.Click();
-            BuyAndPay.Click();
+            ReadBuyAndPay();
             WaitForElementDisappear(Loaders);
             Assert.AreEqual("Zamówienie otrzymane", driver.FindElement(By.CssSelector("h1.entry-title")).Text, "Inccorect header.");
 
@@ -205,9 +198,7 @@ namespace KursSelenium.TestProject
         public void SuccesfulPaymentExistingUserTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddToCart.Click();
-            GoToCart.Click();
-            GoToPayment.Click();
+            AddToTheCart();
             UserLogin.Click();
             _ = wait.Until(d => LoginForm.Displayed);
             UsernameField.SendKeys("katarzyna.palusik");
@@ -215,8 +206,7 @@ namespace KursSelenium.TestProject
             LoginButton.Click();
             WaitForElementDisappear(Loaders);
             EnterPayCardData();
-            ReadCheckbox.Click();
-            BuyAndPay.Click();
+            ReadBuyAndPay();
             WaitForElementDisappear(Loaders);
             Assert.AreEqual("Zamówienie otrzymane", driver.FindElement(By.CssSelector("h1.entry-title")).Text, "Inccorect header.");
 
@@ -238,12 +228,24 @@ namespace KursSelenium.TestProject
                 throw;
             }
         }
-        private void AddFuerteventuraSotaventoToTheCart()
+        private void AddToTheCart()
         {
 
             AddToCart.Click();
             GoToCart.Click();
             GoToPayment.Click();
+        }
+        private void ReadBuyAndPay()
+        {
+
+            ReadCheckbox.Click();
+            BuyAndPay.Click();
+        }
+        private void ChangeQty(string number)
+        {
+            QuantityField.Clear();
+            QuantityField.SendKeys(number);
+            
         }
         private float CalculateTax(float productPrice)
         {

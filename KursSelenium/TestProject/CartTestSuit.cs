@@ -26,7 +26,6 @@ namespace KursSelenium.TestProject
         IWebElement CartIsEmpty => driver.FindElement(By.CssSelector("p.cart-empty"), 2);
         IWebElement RemoveProduct => driver.FindElement(By.CssSelector("td.product-remove a"), 2);
         IWebElement AddToCart => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
-        IWebElement DissmisNoticeLink => driver.FindElement(By.CssSelector(".woocomerce-store_dissmis-link"));
         By Loaders => By.CssSelector(".blocUI");
 
         [SetUp]
