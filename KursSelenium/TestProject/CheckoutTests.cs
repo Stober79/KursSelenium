@@ -92,7 +92,7 @@ namespace KursSelenium.TestProject
         public void FieldsValidationTest()
         {
             driver.Navigate().GoToUrl(Url.FakestoreFuerteventuraSotavento());
-            AddToTheCart();
+            AddToTheCartAndGoToPayment();
             _ = CheckoutForm;
             EnterPayCardData();
             BuyAndPay.Click();
@@ -113,13 +113,12 @@ namespace KursSelenium.TestProject
                 Assert.DoesNotThrow(() => _ = ErrorList, "Error list was not found");
                 Assert.AreEqual(errorList.OrderBy(element => element), errorList.OrderBy(element => element), "Inccorect massages.");
             });
-
         }
         [Test]
         public void ReciveOneProductTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddToTheCart();
+            AddToTheCartAndGoToPayment();
             _ = CheckoutForm;
             float tax = CalculateTax(productPrices[0]);
             Assert.Multiple(() =>
@@ -128,8 +127,6 @@ namespace KursSelenium.TestProject
                 Assert.AreEqual(productPriceText[0], CartSubtotalElement.Text, "Incorrect price.");
                 Assert.AreEqual(productPriceText[0] + " (zawiera " + FormatNumber(tax) + " VAT)", OrderTotalElement.Text, "Incorrect vat.");
             });
-
-
         }
         [Test]
         public void ReciveTwoProductTest()
@@ -139,7 +136,7 @@ namespace KursSelenium.TestProject
             AddToCart.Click();
             driver.Navigate().GoToUrl(baseUrl + productsUrls[1]);
             ChangeQty("3");
-            AddToTheCart();
+            AddToTheCartAndGoToPayment();
             _ = CheckoutForm;
             float price = productPrices[0] * 2 + productPrices[1] * 3;
             Assert.Multiple(() =>
@@ -171,13 +168,12 @@ namespace KursSelenium.TestProject
                 Assert.AreEqual(FormatNumber(productPrices[0] * 2), CartSubtotalElement.Text, "Incorrect price.");
                 Assert.AreEqual(FormatNumber(productPrices[0] * 2) + " (zawiera " + FormatNumber(tax) + " VAT)", OrderTotalElement.Text, "Incorrect vat.");
             });
-
         }
         [Test]
         public void SuccesfulPaymentTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddToTheCart();
+            AddToTheCartAndGoToPayment();
             _ = CheckoutForm;
             FirstNameField.SendKeys("Katarzyna");
             LastNameField.SendKeys("Palusik");
@@ -190,15 +186,13 @@ namespace KursSelenium.TestProject
             EnterPayCardData();
             WaitForElementDisappear(Loaders);
             ReadBuyAndPay();
-            WaitForElementDisappear(Loaders);
             Assert.AreEqual("Zamówienie otrzymane", driver.FindElement(By.CssSelector("h1.entry-title")).Text, "Inccorect header.");
-
         }
         [Test]
         public void SuccesfulPaymentExistingUserTest()
         {
             driver.Navigate().GoToUrl(baseUrl + productsUrls[0]);
-            AddToTheCart();
+            AddToTheCartAndGoToPayment();
             UserLogin.Click();
             _ = wait.Until(d => LoginForm.Displayed);
             UsernameField.SendKeys("katarzyna.palusik");
@@ -207,11 +201,7 @@ namespace KursSelenium.TestProject
             WaitForElementDisappear(Loaders);
             EnterPayCardData();
             ReadBuyAndPay();
-            WaitForElementDisappear(Loaders);
             Assert.AreEqual("Zamówienie otrzymane", driver.FindElement(By.CssSelector("h1.entry-title")).Text, "Inccorect header.");
-
-
-
         }
 
 
@@ -228,7 +218,7 @@ namespace KursSelenium.TestProject
                 throw;
             }
         }
-        private void AddToTheCart()
+        private void AddToTheCartAndGoToPayment()
         {
 
             AddToCart.Click();
@@ -240,6 +230,7 @@ namespace KursSelenium.TestProject
 
             ReadCheckbox.Click();
             BuyAndPay.Click();
+            WaitForElementDisappear(Loaders);
         }
         private void ChangeQty(string number)
         {
@@ -253,7 +244,11 @@ namespace KursSelenium.TestProject
         }
         private string FormatNumber(float number)
         {
-            return string.Format("{0:### ###.00}", number) + " zł";
+            if (number < 1000)
+            {
+                return string.Format("{0:###.00}", number) + " zł";
+            }
+            else return string.Format("{0:### ###.00}", number) + " zł";
         }
         private void EnterPayCardData()
         {
