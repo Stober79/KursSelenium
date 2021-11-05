@@ -17,7 +17,8 @@ namespace SeleniumTests
         WebDriverWait wait;
         IJavaScriptExecutor jse;
         IWebElement addedProduct;
-        IList<IWebElement> listOfProductsInTheCart => driver.FindElements(By.CssSelector("tr.cart_item"), 5);
+        string baseUrl = "https://fakestore.testelka.pl";
+        IList<IWebElement> CartItems => driver.FindElements(By.CssSelector("tr.cart_item"), 5);
         IWebElement Qty => driver.FindElement(By.CssSelector(".qty"), 2);
         IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
         IWebElement GoToCart => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
@@ -27,6 +28,17 @@ namespace SeleniumTests
         IWebElement RemoveProduct => driver.FindElement(By.CssSelector("td.product-remove a"), 2);
         IWebElement AddToCart => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
         By Loaders => By.CssSelector(".blocUI");
+
+        IList<string> productsIDs = new List<string>()
+        {
+              "389",
+              "62"
+        };
+        IList<string> productsUrls = new List<string>()
+        {
+                "/product/wyspy-zielonego-przyladka-sal/",
+                "/product/zmien-swoja-sylwetke-yoga-na-malcie/"
+        };
 
         [SetUp]
         public void Setup()
@@ -49,14 +61,15 @@ namespace SeleniumTests
         [Test]
         public void AddProductToTheCartTest()
         {
-            AddItemsToTheCart("1", "section.storefront-recent-products li.post-4116");
-            GoToCart.Click();
-            addedProduct = listOfProductsInTheCart[0].FindElement(By.CssSelector("td.product-name a[href='https://fakestore.testelka.pl/product/windsurfing-w-lanzarote-costa-teguise/']"));
-            string productName = "Windsurfing w Lanzarote (Costa Teguise)";
-            Assert.Multiple(() =>
+            ProductPage productPage = new ProductPage(driver);
+            productPage.GoTo(productsUrls[0]);
+            productPage.AddToCart();
+            productPage.GoToCArt();
+            CartPage cartPage = new CartPage(driver);
+           Assert.Multiple(() =>
             {
-                Assert.IsTrue(listOfProductsInTheCart.Count == 1);
-                Assert.AreEqual(productName, addedProduct.Text, " Inccorect product name.");
+                Assert.AreEqual(1,cartPage.CartItems.Count,"Number of products in cart is not 1.");
+                Assert.AreEqual(productsIDs[0], cartPage.ItemID, "Product's in cart is not "+productsIDs[0]);
             });
         }
         [Test]
@@ -64,10 +77,10 @@ namespace SeleniumTests
         {
             AddItemsToTheCart("5", "section.storefront-recent-products li.post-4116");
             GoToCart.Click();
-            addedProduct = listOfProductsInTheCart[0].FindElement(By.XPath(".//td[@class='product-remove']/ a[@data-product_id='4116']/../following-sibling::td[@class='product-quantity']//input"));
+            addedProduct = CartItems[0].FindElement(By.XPath(".//td[@class='product-remove']/ a[@data-product_id='4116']/../following-sibling::td[@class='product-quantity']//input"));
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(listOfProductsInTheCart.Count == 1);
+                Assert.IsTrue(CartItems.Count == 1);
                 Assert.AreEqual("5", addedProduct.GetAttribute("value"), "Incorrect number of items.");
             });
         }
@@ -78,8 +91,8 @@ namespace SeleniumTests
             MainPage.Click();
             AddItemsToTheCart("1", "section.storefront-recent-products li.post-393");
             GoToCart.Click();
-            addedProduct = listOfProductsInTheCart[0].FindElement(By.CssSelector("td.product-name a[href='https://fakestore.testelka.pl/product/windsurfing-w-lanzarote-costa-teguise/']"));
-            Assert.IsTrue(listOfProductsInTheCart.Count == 2);
+            addedProduct = CartItems[0].FindElement(By.CssSelector("td.product-name a[href='https://fakestore.testelka.pl/product/windsurfing-w-lanzarote-costa-teguise/']"));
+            Assert.IsTrue(CartItems.Count == 2);
 
         }
         [Test]
@@ -102,7 +115,7 @@ namespace SeleniumTests
             AddItemsToTheCart("1", "section.storefront-recent-products li.post-4116");
             GoToCart.Click();
             ChangeQty("3");
-            addedProduct = listOfProductsInTheCart[0].FindElement(By.XPath(".//td[@class='product-remove']/ a[@data-product_id='4116']/../following-sibling::td[@class='product-quantity']//input"));
+            addedProduct = CartItems[0].FindElement(By.XPath(".//td[@class='product-remove']/ a[@data-product_id='4116']/../following-sibling::td[@class='product-quantity']//input"));
             Assert.AreEqual("3", addedProduct.GetAttribute("value"), "Incorrect number of items.");
 
         }
