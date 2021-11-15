@@ -10,7 +10,7 @@ namespace SeleniumTests
         private readonly RemoteWebDriver driver;
         private readonly string baseUrl = "https://fakestore.testelka.pl";
         private string ProductUrl => baseUrl + "/product";
-        public  int stock => Convert.ToInt32(driver.FindElement(By.CssSelector("p.stock")).Text.Replace(" w magazynie", ""));
+        public int stock;
         private IWebElement AddToCartButton => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
         public IWebElement GoToCartButton => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
         private IWebElement QuantityField => driver.FindElement(By.CssSelector(".qty"), 2);
@@ -32,12 +32,12 @@ namespace SeleniumTests
 
         public ProductPage AddToCart(int quantity = 1)
         {
-            if (quantity <= 0 )
+            if (quantity <= 0)
             {
 
-                    QuantityField.Clear();
-                    QuantityField.SendKeys(quantity.ToString());
-                    AddToCartButton.Click();
+                QuantityField.Clear();
+                QuantityField.SendKeys(quantity.ToString());
+                AddToCartButton.Click();
             }
             else if (quantity != 1)
             {
@@ -51,6 +51,7 @@ namespace SeleniumTests
                 AddToCartButton.Click();
                 _ = GoToCartButton;
             }
+            stock = Convert.ToInt32(driver.FindElement(By.CssSelector("p.stock")).Text.Replace(" w magazynie", ""));
             return this;
         }
 
@@ -74,7 +75,7 @@ namespace SeleniumTests
         public ProductPage ChangeQuantityFieldOverTheStockValue()
         {
             QuantityField.Clear();
-            QuantityField.SendKeys((stock+1).ToString());
+            QuantityField.SendKeys((stock + 1).ToString());
             return this;
         }
         private void WaitForLoadersDisappear()
@@ -90,7 +91,5 @@ namespace SeleniumTests
                 throw;
             }
         }
-
-
     }
 }

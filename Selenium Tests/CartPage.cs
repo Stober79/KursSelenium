@@ -47,7 +47,7 @@ namespace SeleniumTests
 
         public CartPage RemoveItem(string productId)
         {
-            driver.FindElement(By.CssSelector("a[data-prduct_id='" + productId + "']")).Click();
+            driver.FindElement(By.CssSelector("a[data-product_id='" + productId + "']")).Click();
             WaitForLoadersDisappear();
             return this;
         }

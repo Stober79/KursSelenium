@@ -110,12 +110,13 @@ namespace SeleniumTests
         public void CantAddZeroItemsTest()
         {
             ProductPage productPage = new ProductPage(driver);
-            productPage.GoTo(productsUrls[0]).AddToCart(0);
+            productPage.GoTo(productsUrls[0]).
+                AddToCart(0);
 
             Assert.Multiple(() =>
             {
                 Assert.IsTrue(productPage.IsQuantityFieldRangeUnderflowPresent(), "The minimum value is not 1.");
-                Assert.Throws<WebDriverException>(() => _ = productPage.GoToCartButton, "Go to cart link wa found but it shouldn't. Nothing should be added to cart when you try add o items.");
+               Assert.Throws<WebDriverTimeoutException>(() => _ = productPage.GoToCartButton, "Go to cart link wa found but it shouldn't. Nothing should be added to cart when you try add o items.");
             });
         }
         [Test]
@@ -150,7 +151,7 @@ namespace SeleniumTests
         public void CanChangeToMoreThanStockTest()
         {
             ProductPage productPage = new ProductPage(driver);
-            CartPage cartpage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(productPage.stock+1);
+            CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(productPage.stock+1);
 
             Assert.IsTrue(productPage.IsQuantityFieldRangeOverflowPresent(), "blelel");
 
