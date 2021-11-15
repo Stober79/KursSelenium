@@ -1,9 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using Helpers;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
-namespace SeleniumTests
+namespace FakestorePageObjects
 {
     public class ProductPage
     {
@@ -16,6 +18,7 @@ namespace SeleniumTests
         private IWebElement QuantityField => driver.FindElement(By.CssSelector(".qty"), 2);
         private IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
         private By Loaders => By.CssSelector(".blocUI");
+
 
 
 
@@ -72,12 +75,6 @@ namespace SeleniumTests
             return (bool)jse.ExecuteScript("return arguments[0].validity.rangeOverflow", QuantityField);
         }
 
-        public ProductPage ChangeQuantityFieldOverTheStockValue()
-        {
-            QuantityField.Clear();
-            QuantityField.SendKeys((stock + 1).ToString());
-            return this;
-        }
         private void WaitForLoadersDisappear()
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
@@ -92,4 +89,5 @@ namespace SeleniumTests
             }
         }
     }
+
 }

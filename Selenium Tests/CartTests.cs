@@ -1,64 +1,24 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
-using SeleniumTests.Element;
-using SeleniumTests.StartSetup;
+
+using FakestorePageObjects;
 
 namespace SeleniumTests
 {
-    public class CartTests
+     class CartTests : BaseTests
     {
-        RemoteWebDriver driver;
-        DriverOptions options;
-        WebDriverWait wait;
-        IJavaScriptExecutor jse;
-        IWebElement addedProduct;
-        string baseUrl = "https://fakestore.testelka.pl";
-        IList<IWebElement> CartItems => driver.FindElements(By.CssSelector("tr.cart_item"), 5);
-        IWebElement Qty => driver.FindElement(By.CssSelector(".qty"), 2);
-        IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
-        IWebElement GoToCart => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
-        IWebElement MainPage => driver.FindElement(By.CssSelector("li#menu-item-197"), 2);
-        IWebElement Cart => driver.FindElement(By.CssSelector("li#menu-item-200"), 2);
-        IWebElement CartIsEmpty => driver.FindElement(By.CssSelector("p.cart-empty"), 2);
-        IWebElement RemoveProduct => driver.FindElement(By.CssSelector("td.product-remove a"), 2);
-        IWebElement AddToCart => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
-        IWebElement CartTable => driver.FindElement(By.CssSelector("table.shop_table.cart"), 2);
-        By Loaders => By.CssSelector(".blocUI");
 
-        IList<string> productsIDs = new List<string>()
+         IList<string> productsIDs = new List<string>()
         {
               "389",
               "62"
         };
-        IList<string> productsUrls = new List<string>()
+         IList<string> productsUrls = new List<string>()
         {
                 "/product/wyspy-zielonego-przyladka-sal/",
                 "/product/zmien-swoja-sylwetke-yoga-na-malcie/"
         };
-
-        [SetUp]
-        public void Setup()
-        {
-            options = new ChromeOptions();
-            //options = new FirefoxOptions();
-            driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
-            Start.Setup(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
-            driver.Navigate().GoToUrl(Url.FakestoreMainPage());
-            Button.InfoList(driver).Click();
-            jse = (IJavaScriptExecutor)driver;
-
-        }
-        [TearDown]
-        public void Quit()
-        {
-            driver.Quit();
-        }
         [Test]
         public void AddProductToTheCartTest()
         {

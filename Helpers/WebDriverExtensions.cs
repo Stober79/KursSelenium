@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 
-namespace SeleniumTests
+namespace Helpers
 {
     public static class WebDriverExtensions
     {

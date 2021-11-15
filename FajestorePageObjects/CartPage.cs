@@ -1,11 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using Helpers;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SeleniumTests
+namespace FakestorePageObjects
 {
     public class CartPage
     {
@@ -22,6 +23,7 @@ namespace SeleniumTests
         public IList<string> ItemIDs => CartItems.Select(element => element.FindElement(By.CssSelector("a")).GetAttribute("data-product_id")).ToList();
         private IWebElement CartTable => driver.FindElement(By.CssSelector("table.shop_table.cart"), 2);
         private IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
+        private IWebElement GoToCheckoutButton => driver.FindElement(By.CssSelector("a.checkout-button"), 2);
 
         public IWebElement QuantityField {
             get
@@ -72,6 +74,12 @@ namespace SeleniumTests
             UpdateCart.Click();
             WaitForLoadersDisappear();
             return this;
+        }
+
+        public CheckoutPage GoToCheckout()
+        {
+            GoToCheckoutButton.Click();
+            return new  CheckoutPage(driver);
         }
 
 
