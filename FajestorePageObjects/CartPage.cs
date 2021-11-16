@@ -1,16 +1,14 @@
 ﻿using Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FakestorePageObjects
 {
-    public class CartPage :BasePage
+    public class CartPage : BasePage
     {
-        
+
         private string CartUrl => baseUrl + "/koszyk";
 
         public IList<IWebElement> CartItems
@@ -38,7 +36,7 @@ namespace FakestorePageObjects
         public IWebElement CartEmptyMessage => driver.FindElement(By.CssSelector(".cart-empty.woocommerce-info"));
 
         public CartPage(RemoteWebDriver driver) : base(driver) { }
-         
+
 
         public CartPage GoTo()
         {

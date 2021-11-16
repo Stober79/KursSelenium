@@ -1,12 +1,11 @@
 ﻿using Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 using System;
 
 namespace FakestorePageObjects
 {
-    public class ProductPage: BasePage
+    public class ProductPage : BasePage
     {
 
         private string ProductUrl => baseUrl + "/product";

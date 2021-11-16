@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FakestorePageObjects
 {
-    public class CheckoutPage :BasePage
+    public class CheckoutPage : BasePage
     {
 
         private IWebElement CardNumberField => driver.FindElement(By.CssSelector("input[name='cardnumber']"), 5);
@@ -38,10 +38,10 @@ namespace FakestorePageObjects
         private IWebElement UsernameField => driver.FindElement(By.CssSelector("input#username"), 2);
         private IWebElement PasswordField => driver.FindElement(By.CssSelector("input#password"), 2);
         private IWebElement LoginButton => driver.FindElement(By.CssSelector("button[name='login']"), 2);
-        
 
 
-        public CheckoutPage(RemoteWebDriver driver): base(driver) { }
+
+        public CheckoutPage(RemoteWebDriver driver) : base(driver) { }
 
         public CheckoutPage FillInCardData(string cardNumber, string cardExpirationDate, string cardCvc)
         {
