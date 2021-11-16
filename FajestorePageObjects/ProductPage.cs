@@ -6,25 +6,17 @@ using System;
 
 namespace FakestorePageObjects
 {
-    public class ProductPage
+    public class ProductPage: BasePage
     {
-        private readonly RemoteWebDriver driver;
-        private readonly string baseUrl = "https://fakestore.testelka.pl";
+
         private string ProductUrl => baseUrl + "/product";
         public int stock;
         private IWebElement AddToCartButton => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
         public IWebElement GoToCartButton => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
         private IWebElement QuantityField => driver.FindElement(By.CssSelector(".qty"), 2);
-        private IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
-        private By Loaders => By.CssSelector(".blocUI");
 
 
-
-
-        public ProductPage(RemoteWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        public ProductPage(RemoteWebDriver driver) : base(driver) { }
 
         public ProductPage GoTo(string productSlag)
         {
@@ -72,20 +64,6 @@ namespace FakestorePageObjects
         {
             IJavaScriptExecutor jse = driver;
             return (bool)jse.ExecuteScript("return arguments[0].validity.rangeOverflow", QuantityField);
-        }
-
-        private void WaitForLoadersDisappear()
-        {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            try
-            {
-                wait.Until(d => driver.FindElements(Loaders).Count == 0);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                Console.WriteLine("Element located by " + Loaders + " didn't disapear in 5 seconds");
-                throw;
-            }
         }
     }
 

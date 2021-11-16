@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KursSelenium", "KursSeleniu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTests", "Selenium Tests\SeleniumTests.csproj", "{5C44B214-EC1A-4B74-AB37-4FD18CBAB1F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FajestorePageObjects", "FajestorePageObjects\FajestorePageObjects.csproj", "{4FB2B644-59DD-4AB6-9A95-47953267F0C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakestorePageObjects", "FajestorePageObjects\FakestorePageObjects.csproj", "{4FB2B644-59DD-4AB6-9A95-47953267F0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{642B29EF-0960-4B70-ADD4-965BFB70DE4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{642B29EF-0960-4B70-ADD4-965BFB70DE4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

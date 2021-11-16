@@ -8,10 +8,9 @@ using System.Linq;
 
 namespace FakestorePageObjects
 {
-    public class CartPage
+    public class CartPage :BasePage
     {
-        private readonly RemoteWebDriver driver;
-        private readonly string baseUrl = "https://fakestore.testelka.pl";
+        
         private string CartUrl => baseUrl + "/koszyk";
 
         public IList<IWebElement> CartItems
@@ -37,12 +36,9 @@ namespace FakestorePageObjects
         }
 
         public IWebElement CartEmptyMessage => driver.FindElement(By.CssSelector(".cart-empty.woocommerce-info"));
-        private By Loaders => By.CssSelector(".blocUI");
 
-        public CartPage(RemoteWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        public CartPage(RemoteWebDriver driver) : base(driver) { }
+         
 
         public CartPage GoTo()
         {
@@ -55,19 +51,6 @@ namespace FakestorePageObjects
             driver.FindElement(By.CssSelector("a[data-product_id='" + productId + "']")).Click();
             WaitForLoadersDisappear();
             return this;
-        }
-        private void WaitForLoadersDisappear()
-        {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            try
-            {
-                wait.Until(d => driver.FindElements(Loaders).Count == 0);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                Console.WriteLine("Element located by " + Loaders + " didn't disapear in 5 seconds");
-                throw;
-            }
         }
 
         public CartPage ChangeQuantity(int quantity = 1)

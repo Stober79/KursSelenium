@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FajestorePageObjects\FajestorePageObjects.csproj" />
+    <ProjectReference Include="..\FajestorePageObjects\FakestorePageObjects.csproj" />
   </ItemGroup>
 
 </Project>

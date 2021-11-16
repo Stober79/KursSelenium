@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace FakestorePageObjects
 {
-    public class CheckoutPage
+    public class CheckoutPage :BasePage
     {
-        private RemoteWebDriver driver;
+
         private IWebElement CardNumberField => driver.FindElement(By.CssSelector("input[name='cardnumber']"), 5);
         private IWebElement CardDataField => driver.FindElement(By.CssSelector("input[name='exp-date']"), 2);
         private IWebElement CardCodeField => driver.FindElement(By.CssSelector("input[name='cvc']"), 2);
@@ -39,12 +39,9 @@ namespace FakestorePageObjects
         private IWebElement PasswordField => driver.FindElement(By.CssSelector("input#password"), 2);
         private IWebElement LoginButton => driver.FindElement(By.CssSelector("button[name='login']"), 2);
         
-        private By Loaders => By.CssSelector(".blocUI");
 
-        public CheckoutPage(RemoteWebDriver driver)
-        {
-            this.driver = driver;
-        }
+
+        public CheckoutPage(RemoteWebDriver driver): base(driver) { }
 
         public CheckoutPage FillInCardData(string cardNumber, string cardExpirationDate, string cardCvc)
         {
@@ -68,17 +65,17 @@ namespace FakestorePageObjects
             return (T)Activator.CreateInstance(typeof(T), driver);
         }
 
-        public CheckoutPage FillForm(string v1, string v2, string v3, string v4, string v5, string v6, string v7, string v8)
+        public CheckoutPage FillForm(string firstName, string lastName, string company, string street, string postCode, string city, string phone, string email)
         {
             _ = CheckoutForm;
-            FirstNameField.SendKeys(v1);
-            LastNameField.SendKeys(v2);
-            CompanyField.SendKeys(v3);
-            StreetField.SendKeys(v4);
-            PostCodeField.SendKeys(v5);
-            CityField.SendKeys(v6);
-            PhoneField.SendKeys(v7);
-            EmailField.SendKeys(v8);
+            FirstNameField.SendKeys(firstName);
+            LastNameField.SendKeys(lastName);
+            CompanyField.SendKeys(company);
+            StreetField.SendKeys(street);
+            PostCodeField.SendKeys(postCode);
+            CityField.SendKeys(city);
+            PhoneField.SendKeys(phone);
+            EmailField.SendKeys(email);
             return this;
         }
 
@@ -86,19 +83,6 @@ namespace FakestorePageObjects
         {
             ReadCheckbox.Click();
             return this;
-        }
-        private void WaitForLoadersDisappear()
-        {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            try
-            {
-                wait.Until(d => driver.FindElements(Loaders).Count == 0);
-            }
-            catch (WebDriverTimeoutException)
-            {
-                Console.WriteLine("Element located by " + Loaders + " didn't disapear in 5 seconds");
-                throw;
-            }
         }
 
         public CheckoutPage OpenLogInForm()

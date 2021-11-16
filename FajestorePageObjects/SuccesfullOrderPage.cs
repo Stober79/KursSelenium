@@ -6,13 +6,10 @@ using System.Text;
 
 namespace FakestorePageObjects
 {
-    public class SuccesfullOrderPage
+    public class SuccesfullOrderPage : BasePage
     {
-        private RemoteWebDriver driver;
         public  IWebElement OrderReciveMesseage => driver.FindElement(By.CssSelector("h1.entry-title"));
-        public SuccesfullOrderPage(RemoteWebDriver driver)
-        {
-        this.driver = driver;
-        }
+        public SuccesfullOrderPage(RemoteWebDriver driver) : base(driver) { }
+
     }
 }
