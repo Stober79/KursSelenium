@@ -33,7 +33,7 @@ namespace SeleniumTests
         {
 
             ProductPage productPage = new ProductPage(driver);
-            CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillInCardData(cardNumber, cardExpirationDate, cardCvc).PlaceOrder();
+            CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillInCardData(cardNumber, cardExpirationDate, cardCvc).PlaceOrder<CheckoutPage>();
             IList<string> errorList = checkoutPage.ErrorMessagesList.Select(element => element.Text).ToList();
             IList<string> expectedList = new List<string>{
                 "Imię płatnika jest wymaganym polem." ,
@@ -100,21 +100,21 @@ namespace SeleniumTests
         public void SuccesfulPaymentTest()
         {
             ProductPage productPage = new ProductPage(driver);
-            CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillForm("Katarzyna", "Palusik", "CC", "Toszecka", "44-100", "Gliwice", "123-456-789", "test@t.op").
+            SuccesfullOrderPage sucessfullOrderPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillForm("Katarzyna", "Palusik", "CC", "Toszecka", "44-100", "Gliwice", "123-456-789", "test@t.op").
             FillInCardData(cardNumber, cardExpirationDate, cardCvc).
             CheckReadCheckbox().
-            PlaceOrder();
-            Assert.AreEqual("Zamówienie otrzymane", checkoutPage.OrderReciveMesseage, "Inccorect header.");
+            PlaceOrder<SuccesfullOrderPage>();
+            Assert.AreEqual("Zamówienie otrzymane", sucessfullOrderPage.OrderReciveMesseage.Text, "Inccorect header.");
         }
         [Test]
         public void SuccesfulPaymentExistingUserTest()
         {
             ProductPage productPage = new ProductPage(driver);
-            CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().OpenLogInForm().FilLogInFields("katarzyna.palusik", "$AdminAdmin123").
+            SuccesfullOrderPage sucessfullOrderPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().OpenLogInForm().FilLogInFields("katarzyna.palusik", "$AdminAdmin123").
             FillInCardData(cardNumber, cardExpirationDate, cardCvc).
             CheckReadCheckbox().
-            PlaceOrder();
-            Assert.AreEqual("Zamówienie otrzymane", checkoutPage.OrderReciveMesseage, "Inccorect header.");
+            PlaceOrder<SuccesfullOrderPage>();
+            Assert.AreEqual("Zamówienie otrzymane", sucessfullOrderPage.OrderReciveMesseage.Text, "Inccorect header.");
         }
         private float CalculateTax(float productPrice)
         {

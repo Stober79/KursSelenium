@@ -38,7 +38,7 @@ namespace FakestorePageObjects
         private IWebElement UsernameField => driver.FindElement(By.CssSelector("input#username"), 2);
         private IWebElement PasswordField => driver.FindElement(By.CssSelector("input#password"), 2);
         private IWebElement LoginButton => driver.FindElement(By.CssSelector("button[name='login']"), 2);
-        public string OrderReciveMesseage => driver.FindElement(By.CssSelector("h1.entry-title")).Text;
+        
         private By Loaders => By.CssSelector(".blocUI");
 
         public CheckoutPage(RemoteWebDriver driver)
@@ -61,11 +61,11 @@ namespace FakestorePageObjects
             return this;
         }
 
-        public CheckoutPage PlaceOrder()
+        public T PlaceOrder<T>()
         {
             PlaceOrderButton.Click();
             WaitForLoadersDisappear();
-            return this;
+            return (T)Activator.CreateInstance(typeof(T), driver);
         }
 
         public CheckoutPage FillForm(string v1, string v2, string v3, string v4, string v5, string v6, string v7, string v8)
