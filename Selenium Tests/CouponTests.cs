@@ -1,4 +1,5 @@
 ﻿using FakestorePageObjects;
+using Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
@@ -50,8 +51,9 @@ namespace SeleniumTests
             {
                 Assert.AreEqual(1, cartPage.ErrorList.Count, " Number of error massages is correct.");
                 Assert.AreEqual("Minimalna wartość zamówienia dla tego kuponu to 3 000,00 zł.", cartPage.ErrorList[0].Text, "Coupon was not succesfully apply.");
-                Assert.Throws<WebDriverTimeoutException>(() => _ =
+                CustomAssert.ThrowsWebDriverTimeoutException(() => _ =
                 cartPage.CartDiscountRow, "Cart discount element was found in cart summary");
+
             });
         }
         [Test]
@@ -90,7 +92,7 @@ namespace SeleniumTests
             {
                 Assert.AreEqual(1, cartPage.ErrorList.Count, " Number of error massages is correct.");
                 Assert.AreEqual("Przepraszamy, tego kuponu nie można zastosować do wybranych produktów.", cartPage.ErrorList[0].Text, "Coupon was not succesfully apply.");
-                Assert.Throws<WebDriverTimeoutException>(() => _ =
+                CustomAssert.ThrowsWebDriverTimeoutException(() => _ =
                 cartPage.CartDiscountRow, "Cart discount element was found in cart summary");
             });
         }
@@ -103,7 +105,7 @@ namespace SeleniumTests
             {
                 Assert.AreEqual(1, cartPage.ErrorList.Count, " Number of error massages is correct.");
                 Assert.AreEqual("Ten kupon stracił ważność.", cartPage.ErrorList[0].Text, "Coupon was not succesfully apply.");
-                Assert.Throws<WebDriverTimeoutException>(() => _ =
+                CustomAssert.ThrowsWebDriverTimeoutException(() => _ =
                 cartPage.CartDiscountRow, "Cart discount element was found in cart summary");
             });
         }

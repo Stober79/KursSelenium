@@ -1,4 +1,5 @@
 using FakestorePageObjects;
+using Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.Generic;
@@ -75,7 +76,7 @@ namespace SeleniumTests
             Assert.Multiple(() =>
             {
                 Assert.IsTrue(productPage.IsQuantityFieldRangeUnderflowPresent(), "The minimum value is not 1.");
-                Assert.Throws<WebDriverTimeoutException>(() => _ = productPage.GoToCartButton, "Go to cart link wa found but it shouldn't. Nothing should be added to cart when you try add o items.");
+                CustomAssert.ThrowsWebDriverTimeoutException(() => _ = productPage.GoToCartButton, "Go to cart link wa found but it shouldn't. Nothing should be added to cart when you try add o items.");
             });
         }
         [Test]
@@ -104,6 +105,7 @@ namespace SeleniumTests
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(0);
             Assert.DoesNotThrow(() =>
             _ = cartPage.CartEmptyMessage, "There os no \"Empty Cart\" massage. Product was not removed from cart");
+
 
         }
         [Test]
