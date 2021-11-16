@@ -3,7 +3,6 @@ using KursSelenium.StartSetup;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -236,7 +235,7 @@ namespace KursSelenium.TestProject
         {
             QuantityField.Clear();
             QuantityField.SendKeys(number);
-            
+
         }
         private float CalculateTax(float productPrice)
         {

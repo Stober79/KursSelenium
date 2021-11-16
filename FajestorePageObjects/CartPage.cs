@@ -13,19 +13,22 @@ namespace FakestorePageObjects
         private readonly RemoteWebDriver driver;
         private readonly string baseUrl = "https://fakestore.testelka.pl";
         private string CartUrl => baseUrl + "/koszyk";
-        
-        public IList<IWebElement> CartItems {
+
+        public IList<IWebElement> CartItems
+        {
             get
             {
-                _=CartTable;
-                return driver.FindElements(By.CssSelector("tr.cart_item"), 5);}
+                _ = CartTable;
+                return driver.FindElements(By.CssSelector("tr.cart_item"), 5);
             }
+        }
         public IList<string> ItemIDs => CartItems.Select(element => element.FindElement(By.CssSelector("a")).GetAttribute("data-product_id")).ToList();
         private IWebElement CartTable => driver.FindElement(By.CssSelector("table.shop_table.cart"), 2);
         private IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
         private IWebElement GoToCheckoutButton => driver.FindElement(By.CssSelector("a.checkout-button"), 2);
 
-        public IWebElement QuantityField {
+        public IWebElement QuantityField
+        {
             get
             {
                 _ = CartTable;
@@ -79,7 +82,7 @@ namespace FakestorePageObjects
         public CheckoutPage GoToCheckout()
         {
             GoToCheckoutButton.Click();
-            return new  CheckoutPage(driver);
+            return new CheckoutPage(driver);
         }
 
 

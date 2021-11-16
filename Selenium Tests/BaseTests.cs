@@ -5,8 +5,6 @@ using OpenQA.Selenium.Remote;
 using SeleniumTests.Element;
 using SeleniumTests.StartSetup;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SeleniumTests
 {
