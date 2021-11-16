@@ -11,7 +11,7 @@ namespace SeleniumTests
     {
         protected RemoteWebDriver driver;
         DriverOptions options;
-        string baseUrl = "https://fakestore.testelka.pl/";
+        public string baseUrl = "https://fakestore.testelka.pl/";
 
         [SetUp]
         public void Setup()

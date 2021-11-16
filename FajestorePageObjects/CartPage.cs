@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,14 @@ namespace FakestorePageObjects
         private IWebElement CartTable => driver.FindElement(By.CssSelector("table.shop_table.cart"), 2);
         private IWebElement UpdateCart => driver.FindElement(By.CssSelector("button[name='update_cart']"), 2);
         private IWebElement GoToCheckoutButton => driver.FindElement(By.CssSelector("a.checkout-button"), 2);
+        private IWebElement CouponCodeField => driver.FindElement(By.CssSelector("#coupon_code"), 2);
+        public IWebElement CouponMassage => driver.FindElement(By.CssSelector("div.woocommerce-message"), 2);
+        private IWebElement ApplyCouponButton => driver.FindElement(By.CssSelector("button[name='apply_coupon']"), 2);
+        public IWebElement CartDiscount => driver.FindElement(By.CssSelector("tr.cart-discount th"), 2);
+        public IWebElement CartDiscountRow => driver.FindElement(By.CssSelector("tr.cart-discount"), 2);
+        public IWebElement CartDiscountValue => driver.FindElement(By.CssSelector("tr.cart-discount span"), 2);
+        public IWebElement OrderTotalWithoutTextElement => driver.FindElement(By.CssSelector("tr.order-total td strong"), 2);
+        public IList<IWebElement> ErrorList => driver.FindElements(By.CssSelector("ul.woocommerce-error li"), 2);
 
         public IWebElement QuantityField
         {
@@ -34,6 +43,12 @@ namespace FakestorePageObjects
         }
 
         public IWebElement CartEmptyMessage => driver.FindElement(By.CssSelector(".cart-empty.woocommerce-info"));
+
+        public CartPage ApplyCoupon()
+        {
+            ApplyCouponButton.Click();
+            return this;
+        }
 
         public CartPage(RemoteWebDriver driver) : base(driver) { }
 
@@ -66,6 +81,10 @@ namespace FakestorePageObjects
             return new CheckoutPage(driver);
         }
 
-
+        public CartPage FillInCouponField(string coupnValue)
+        {
+            CouponCodeField.SendKeys(coupnValue);
+            return this;
+        }
     }
 }
