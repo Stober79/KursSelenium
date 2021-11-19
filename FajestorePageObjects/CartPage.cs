@@ -48,7 +48,7 @@ namespace FakestorePageObjects
             return this;
         }
 
-        public CartPage(IWebDriver driver) : base(driver) { }
+        public CartPage(IWebDriver driver,string baseUrl) : base(driver, baseUrl) { }
 
 
         public CartPage GoTo()
@@ -76,7 +76,7 @@ namespace FakestorePageObjects
         public CheckoutPage GoToCheckout()
         {
             GoToCheckoutButton.Click();
-            return new CheckoutPage(driver);
+            return new CheckoutPage(driver, baseUrl);
         }
 
         public CartPage FillInCouponField(string coupnValue)

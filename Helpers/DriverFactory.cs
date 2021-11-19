@@ -12,11 +12,8 @@ namespace Helpers
     {
         private IWebDriver driver;
 
-        public IWebDriver Create(string browser, bool isRemote, Uri remoteAddress = null)
+        public IWebDriver Create(string browser, bool isRemote, Uri remoteAddress = null, string platformName=null)
         {
-            //remote Firefox
-            //remote Chrome
-            // new Remote Webridver
             if (isRemote)
             {
 
@@ -44,16 +41,22 @@ namespace Helpers
             }
             return driver;
         }
-        private IWebDriver GetRemoteDriver(string browser, Uri remoteAddress)
+        private IWebDriver GetRemoteDriver(string browser, Uri remoteAddress, string platformName=null)
         {
             DriverOptions options;
             switch (browser)
             {
                 case "chrome":
-                    options = new ChromeOptions();
+                    options = new ChromeOptions
+                    {
+                        PlatformName = platformName
+                    };
                     break;
                 case "firefox":
-                    options = new FirefoxOptions();
+                    options = new FirefoxOptions
+                    {
+                        PlatformName = platformName
+                    };
                     break;
                 default:
                     throw new ArgumentException("Provided driver:" + browser + " is not supported. Available: chrome, firfox.");

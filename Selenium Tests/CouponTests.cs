@@ -29,7 +29,7 @@ namespace SeleniumTests
         [Test]
         public void MinimaValueCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage =  productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().FillInCouponField(minimalCoupnValue).ApplyCoupon();
             Assert.Multiple(() =>
             {
@@ -42,7 +42,7 @@ namespace SeleniumTests
         [Test]
         public void ToSmallValueToMinimaValueCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[1]).AddToCart().GoToCart().FillInCouponField(minimalCoupnValue).ApplyCoupon();
             Assert.Multiple(() =>
             {
@@ -56,7 +56,7 @@ namespace SeleniumTests
         [Test]
         public void PercentCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[1]).AddToCart().GoToCart().FillInCouponField(procentCoupon).ApplyCoupon();
             float roundDiscount = procentValuCoupon * productPrices[1];
             Assert.Multiple(() =>
@@ -70,7 +70,7 @@ namespace SeleniumTests
         [Test]
         public void CategoryCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().FillInCouponField(windsurfingCoupon).ApplyCoupon();
             Assert.Multiple(() =>
             {
@@ -83,7 +83,7 @@ namespace SeleniumTests
         [Test]
         public void WrongCategoryCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[1]).AddToCart().GoToCart().FillInCouponField(windsurfingCoupon).ApplyCoupon();
             Assert.Multiple(() =>
             {
@@ -96,7 +96,7 @@ namespace SeleniumTests
         [Test]
         public void OldCouponTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[1]).AddToCart().GoToCart().FillInCouponField(oldCoupon).ApplyCoupon();
             Assert.Multiple(() =>
             {

@@ -8,11 +8,12 @@ namespace FakestorePageObjects
     {
         protected readonly IWebDriver driver;
 
-        protected readonly string baseUrl = "https://fakestore.testelka.pl";
+        protected readonly string baseUrl;
         private By Loaders => By.CssSelector(".blocUI");
-        protected BasePage(IWebDriver driver)
+        protected BasePage(IWebDriver driver, string baseUrl)
         {
             this.driver = driver;
+            this.baseUrl = baseUrl;
         }
         protected void WaitForLoadersDisappear()
         {

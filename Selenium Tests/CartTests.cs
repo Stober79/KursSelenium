@@ -21,7 +21,7 @@ namespace SeleniumTests
         [Test]
         public void AddProductToTheCartTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart();
 
             Assert.Multiple(() =>
@@ -33,7 +33,7 @@ namespace SeleniumTests
         [Test]
         public void TwoItemsOfProductAddedoCartTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart(2).GoToCart();
 
             Assert.Multiple(() =>
@@ -46,7 +46,7 @@ namespace SeleniumTests
         [Test]
         public void AddTwoProductsToTheCartTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoTo(productsUrls[1]).AddToCart().GoToCart();
 
             Assert.Multiple(() =>
@@ -59,7 +59,7 @@ namespace SeleniumTests
         [Test]
         public void CartIsEmptyTest()
         {
-            CartPage cartPage = new CartPage(driver);
+            CartPage cartPage = new CartPage(driver, config.BaseUrl);
             cartPage.GoTo();
 
             Assert.DoesNotThrow(() =>
@@ -68,7 +68,7 @@ namespace SeleniumTests
         [Test]
         public void CantAddZeroItemsTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             productPage.GoTo(productsUrls[0]).
                 AddToCart(0);
 
@@ -81,7 +81,7 @@ namespace SeleniumTests
         [Test]
         public void CanIncreaseNumberOfItemsTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(3);
             Assert.AreEqual("3", cartPage.QuantityField.GetAttribute("value"), "Incorrect number of items.");
 
@@ -89,7 +89,7 @@ namespace SeleniumTests
         [Test]
         public void CanRemoveProductFromCartTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().RemoveItem(productsIDs[0]);
 
             Assert.DoesNotThrow(() =>
@@ -100,7 +100,7 @@ namespace SeleniumTests
         [Test]
         public void ChangingNumberOfItemsToZeroRemovesProductTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(0);
             Assert.DoesNotThrow(() =>
             _ = cartPage.CartEmptyMessage, "There os no \"Empty Cart\" massage. Product was not removed from cart");
@@ -110,7 +110,7 @@ namespace SeleniumTests
         [Test]
         public void CanChangeToMoreThanStockTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CartPage cartPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(productPage.stock + 1);
 
             Assert.IsTrue(productPage.IsQuantityFieldRangeOverflowPresent(), "blelel");

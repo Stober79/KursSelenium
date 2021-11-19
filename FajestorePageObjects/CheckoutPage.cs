@@ -40,7 +40,7 @@ namespace FakestorePageObjects
 
 
 
-        public CheckoutPage(IWebDriver driver) : base(driver) { }
+        public CheckoutPage(IWebDriver driver, string baseUrl) : base(driver, baseUrl) { }
 
         public CheckoutPage FillInCardData(string cardNumber, string cardExpirationDate, string cardCvc)
         {
@@ -61,7 +61,7 @@ namespace FakestorePageObjects
         {
             PlaceOrderButton.Click();
             WaitForLoadersDisappear();
-            return (T)Activator.CreateInstance(typeof(T), driver);
+            return (T)Activator.CreateInstance(typeof(T), driver, baseUrl);
         }
 
         public CheckoutPage FillForm(string firstName, string lastName, string company, string street, string postCode, string city, string phone, string email)

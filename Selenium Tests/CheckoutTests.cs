@@ -32,7 +32,7 @@ namespace SeleniumTests
         public void FieldsValidationTest()
         {
 
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillInCardData(cardNumber, cardExpirationDate, cardCvc).PlaceOrder<CheckoutPage>();
             IList<string> errorList = checkoutPage.ErrorMessagesList.Select(element => element.Text).ToList();
             IList<string> expectedList = new List<string>{
@@ -54,7 +54,7 @@ namespace SeleniumTests
         [Test]
         public void ReviewOrderOneProductTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout();
             float tax = CalculateTax(productPrices[0]);
             Assert.Multiple(() =>
@@ -67,7 +67,7 @@ namespace SeleniumTests
         [Test]
         public void ReviewOrderTwoProductTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart(2).GoTo(productsUrls[1]).AddToCart(3).GoToCart().GoToCheckout();
 
             float price = productPrices[0] * 2 + productPrices[1] * 3;
@@ -85,7 +85,7 @@ namespace SeleniumTests
         public void ChangeNumberOfItemsTest()
         {
 
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             CheckoutPage checkoutPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().ChangeQuantity(2).GoToCheckout();
 
             float tax = CalculateTax(productPrices[0] * 2);
@@ -99,7 +99,7 @@ namespace SeleniumTests
         [Test]
         public void SuccesfulPaymentTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             SuccesfullOrderPage sucessfullOrderPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().FillForm("Katarzyna", "Palusik", "CC", "Toszecka", "44-100", "Gliwice", "123-456-789", "test@t.op").
             FillInCardData(cardNumber, cardExpirationDate, cardCvc).
             CheckReadCheckbox().
@@ -109,7 +109,7 @@ namespace SeleniumTests
         [Test]
         public void SuccesfulPaymentExistingUserTest()
         {
-            ProductPage productPage = new ProductPage(driver);
+            ProductPage productPage = new ProductPage(driver, config.BaseUrl);
             SuccesfullOrderPage sucessfullOrderPage = productPage.GoTo(productsUrls[0]).AddToCart().GoToCart().GoToCheckout().OpenLogInForm().FilLogInFields("katarzyna.palusik", "$AdminAdmin123").
             FillInCardData(cardNumber, cardExpirationDate, cardCvc).
             CheckReadCheckbox().

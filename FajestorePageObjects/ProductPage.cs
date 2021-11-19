@@ -15,7 +15,7 @@ namespace FakestorePageObjects
         private IWebElement QuantityField => driver.FindElement(By.CssSelector(".qty"), 2);
 
 
-        public ProductPage(IWebDriver driver) : base(driver) { }
+        public ProductPage(IWebDriver driver, string baseUrl) : base(driver, baseUrl) { }
 
         public ProductPage GoTo(string productSlag)
         {
@@ -51,7 +51,7 @@ namespace FakestorePageObjects
         public CartPage GoToCart()
         {
             GoToCartButton.Click();
-            return new CartPage(driver);
+            return new CartPage(driver, baseUrl);
         }
 
         public bool IsQuantityFieldRangeUnderflowPresent()

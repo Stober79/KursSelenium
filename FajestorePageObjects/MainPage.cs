@@ -4,8 +4,8 @@ namespace FakestorePageObjects
 {
     public class MainPage : BasePage
     {
-        public DismissNoticeSection DismissNoticeSection => new DismissNoticeSection(driver);
-        public MainPage(IWebDriver driver) : base(driver) { }
+        public DismissNoticeSection DismissNoticeSection => new DismissNoticeSection(driver, baseUrl);
+        public MainPage(IWebDriver driver, string baseUrl) : base(driver, baseUrl) { }
 
         public MainPage GoTo()
         {
