@@ -7,11 +7,11 @@ namespace FakestorePageObjects
 {
     public abstract class BasePage
     {
-        protected readonly RemoteWebDriver driver;
+        protected readonly IWebDriver driver;
 
         protected readonly string baseUrl = "https://fakestore.testelka.pl";
         private By Loaders => By.CssSelector(".blocUI");
-        protected BasePage(RemoteWebDriver driver)
+        protected BasePage(IWebDriver driver)
         {
             this.driver = driver;
         }

@@ -41,7 +41,7 @@ namespace FakestorePageObjects
 
 
 
-        public CheckoutPage(RemoteWebDriver driver) : base(driver) { }
+        public CheckoutPage(IWebDriver driver) : base(driver) { }
 
         public CheckoutPage FillInCardData(string cardNumber, string cardExpirationDate, string cardCvc)
         {

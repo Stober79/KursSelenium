@@ -50,7 +50,7 @@ namespace FakestorePageObjects
             return this;
         }
 
-        public CartPage(RemoteWebDriver driver) : base(driver) { }
+        public CartPage(IWebDriver driver) : base(driver) { }
 
 
         public CartPage GoTo()

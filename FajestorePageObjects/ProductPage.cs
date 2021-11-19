@@ -10,12 +10,13 @@ namespace FakestorePageObjects
 
         private string ProductUrl => baseUrl + "/product";
         public int stock;
+        public IJavaScriptExecutor jse;
         private IWebElement AddToCartButton => driver.FindElement(By.CssSelector("button[name = 'add-to-cart']"), 2);
         public IWebElement GoToCartButton => driver.FindElement(By.CssSelector("div.woocommerce-message a"), 2);
         private IWebElement QuantityField => driver.FindElement(By.CssSelector(".qty"), 2);
 
 
-        public ProductPage(RemoteWebDriver driver) : base(driver) { }
+        public ProductPage(IWebDriver driver) : base(driver) { }
 
         public ProductPage GoTo(string productSlag)
         {
@@ -56,12 +57,12 @@ namespace FakestorePageObjects
 
         public bool IsQuantityFieldRangeUnderflowPresent()
         {
-            IJavaScriptExecutor jse = driver;
+            IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;
             return (bool)jse.ExecuteScript("return arguments[0].validity.rangeUnderflow", QuantityField);
         }
         public bool IsQuantityFieldRangeOverflowPresent()
         {
-            IJavaScriptExecutor jse = driver;
+            IJavaScriptExecutor jse= (IJavaScriptExecutor)driver;
             return (bool)jse.ExecuteScript("return arguments[0].validity.rangeOverflow", QuantityField);
         }
     }

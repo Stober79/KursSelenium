@@ -1,7 +1,9 @@
 ﻿using FakestorePageObjects;
+using Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
 
@@ -9,16 +11,16 @@ namespace SeleniumTests
 {
     class BaseTests
     {
-        protected RemoteWebDriver driver;
-        DriverOptions options;
+        protected IWebDriver driver;
+        private bool isRemote = false;
+        private Uri remoteAddress = new Uri("http://localhost:4444/wd/hub");
         public string baseUrl = "https://fakestore.testelka.pl/";
+        protected string browser = "chrome";
 
         [SetUp]
         public void Setup()
-        {
-            options = new ChromeOptions();
-            //options = new FirefoxOptions();
-            driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options);
+        {      
+            driver = new DriverFactory().Create(browser, isRemote, remoteAddress);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             driver.Manage().Window.Maximize();
@@ -32,5 +34,12 @@ namespace SeleniumTests
         {
             driver.Quit();
         }
+       
     }
 }
+                
+            //local Firefox new FirefoxDriver
+            //local Firefox new ChromeDriver
+            
+        
+
