@@ -2,9 +2,6 @@
 using Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Remote;
 using System;
 
 namespace SeleniumTests
@@ -12,8 +9,8 @@ namespace SeleniumTests
     class BaseTests
     {
         protected IWebDriver driver;
-        private bool isRemote = false;
-        private Uri remoteAddress = new Uri("http://localhost:4444/wd/hub");
+        private readonly bool isRemote = false;
+        private readonly Uri remoteAddress = new Uri("http://localhost:4444/wd/hub");
         public string baseUrl = "https://fakestore.testelka.pl/";
         protected string browser = "chrome";
 

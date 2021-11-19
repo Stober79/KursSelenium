@@ -1,10 +1,7 @@
 ﻿using FakestorePageObjects;
 using Helpers;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SeleniumTests
 {
