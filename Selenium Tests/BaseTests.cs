@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumTests.Config;
+using SeleniumTests.TestData;
 using System;
 
 namespace SeleniumTests
@@ -12,17 +13,17 @@ namespace SeleniumTests
     {
         protected IWebDriver driver; 
         protected Configuration config;
+        protected Data testData;
 
         [OneTimeSetUp]
-        public void SetupConfig()
+        public void Setup()
 
         {
-            config = new Configuration();
-            IConfiguration configurationFile = new ConfigurationBuilder().AddJsonFile(@"Config\configuration.json").Build();
-            configurationFile.Bind(config);
+            ConfigSetup();
+            TestDataSetUp();
         }
         [SetUp]
-        public void Setup()
+        public void DriverSetup()
         {
             driver = new DriverFactory().Create(config.Browser, config.IsRemote, config.RemoteAddress);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -37,6 +38,18 @@ namespace SeleniumTests
         public void Quit()
         {
             driver.Quit();
+        }
+        private void ConfigSetup()
+        {
+            config = new Configuration();
+            IConfiguration configurationFile = new ConfigurationBuilder().AddJsonFile(@"Config\configuration.json").Build();
+            configurationFile.Bind(config);
+        }
+        private void TestDataSetUp()
+        {
+            testData = new Data();
+            IConfiguration testDataFile = new ConfigurationBuilder().AddJsonFile(@"TestData\testData.json").Build();
+            testDataFile.Bind(testData);
         }
        
     }
